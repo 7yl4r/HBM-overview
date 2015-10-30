@@ -94,7 +94,168 @@ TODO
 
 
 \section{Introduction}
-TODO
+\subsection{JiTAIs}
+% Jitai definition
+Just-in-Time Adaptive Interventions are …
+% TODO: Jitai examples
+
+% TODO: Jitai open challenge
+Though JiTAIs offer much for the future of preventative medicine and behavior change, more work is needed to make JiTAIs a reality.
+% TODO: examples’ shortcomings
+% TODO: modeling can close (some of) these gaps
+
+\subsection{JiTAI Models}
+The development of any intervention is always based on some model of the subject and their behavior. 
+For many years causal descriptive models have provided means to conceptualize and predict human behaviors through abstraction.
+For a JiTAI, however, the details of the user model become much more important.
+A JiTAI application requires that very specific assumptions are made about nature and dynamics of the influence of interventions, the internalization of contextual information, and subject behaviors.
+These (often poorly documented) assumptions may significantly influence the power of a JiTAI, and existing behavioral theory offers little guidance.
+
+% TODO: Interventions with firm basis in theory have been found to be more effective \cite{???}.
+More detailed models and more realistic modeling assumptions may then lead to better JiTAIs, but more behavioral science must be injected into model, meaning that this is not a task for the engineers or programmers.
+We suggest that the use of more detailed Human Behavior Models (HBMs) - which provide not only conceptual abstraction of relationships, but also mathematical formulations of these relationships - will enable 1) more realistic assumptions regarding the dynamical nature of the human system, 2) more effective JiTAIs through utilization of these models in treatment optimization.
+
+% TODO: Some Methods for translation exist (csel)
+
+\section{Selected Definitions}
+In this section we present definitions and design considerations relevant to human-behavior modeling, and propose a theory-agnostic technique for defining Human Behavior Models (HBMs) so that different modeling paradigms can be supported within a single methodology. 
+
+\subsection{Human Behavior Model}
+Here we define a human behavior model as a mathematical description of how context is transformed into behavioral outcome through an internal state.
+Under this definition, a HBM can be used to forecast behaviors given a context history and the anticipated future context.
+
+Our first task in describing a Human-Behavior Model is to define the model infows and outflows.
+Here we define the infows as the “context” of the human, the internal variables as “state”, and the outflows of the model as “behaviors”.
+
+This definition includes no constraints on the mathematics that govern variable relationships or on the way internal state is abstracted.
+This means that statistical models trained on data do qualify as HBMs - though arguably less useful ones, since they do not incorporate a logical abstraction of cognition and instead treat the internal state as a “black box”.
+
+\subsubsection{Context, state, motivation, behavior}
+Schmidt et al proposed the division of agent modeling components based on the Physical, Emotional, Cognitive, or Social (PECS) nature of the underlying components, but also formulated the flow of information through the human system in an intuitive way. Here we expand upon this concept and brand this folk-psychology-based segmentation of information flow the Context, State, Behavior (CSB) architecture. In this architecture, information enters the human system from the environment via the agent’s context. The agent’s state is then computed using contextual information. The benefits of using this architecture to compare and contrast models are two fold: 1) organization of model components into intuitive categories allows for an easier understanding of the model, and 2) similar components in different models can be more readily identified. Each of the CSB terms is now explored in more detail:
+
+\paragraph{Context:}
+Dey et al (2001) performed an extensive literature search to define an agent’s context as: “any information that can be used to characterize the situation of entities (i.e., whether a person, place, or object) that are considered relevant to the interaction between a user and an application, including the user and the application themselves. Context is typically the location, identity, and state of people, groups, and computational and physical objects.” In most cases, we find it is sufficient to define context as a set of selected information from the environment available for inflow into the human system. In the real world, consider this to be everything that is observed by your senses. This information may or may not alter the internal state of the human system, but all available information should be included here nonetheless. Contextual information from the environment may be summarized and represented in countless ways, however, depending on the modeling theory used.
+
+\paragraph{State:}
+This set is dependent only on past states and the context. In the real world, internal state includes all information stored in the chemical and physical  arrangement of our bodies. In most models, this mass of information is summarized into meaningful constructs.
+
+\paragraph{Behavior:}
+Behavior can be defined in many ways, but in general this architecture considers behavior as any flow of information out of the human system and into the environment. Conscious behavior can be chosen from a predefined list (e.g. simulated human chooses to eat now), or a behavior description summary (e.g. simulated human’s physical activity level is .4, eating behavior value is .2)
+
+\subsection{model time-scale}
+A Model’s Applicable Time Scale
+One under-explored consideration of modeling human behavior is the optimal time scale of the model. Some psychological models of behavior (such as BJ Fogg’s Motivation-Ability-Trigger model) describe behavior decisions as instantaneous, in-the-moment considerations, while others (like Social Cognitive Theory and the Theory of Planned Behavior) are best applied at the daily time scale.
+
+How can these differently-scaled models be compared or combined? And what about models which may span multiple time-scales?
+
+Firstly, we postulate that the constructs which are most interesting and most intuitive at one time scale may have little or no meaning at a different time scale. Certainly some cross-time-scale constructs may be related to one another and future work may reveal how these relationships may be utilized, but the modeling process is best thought through “one time scale at a time”, first considering what happens on the in-the-moment model, perhaps later considering a separate daily, seasonal, or life-scale model. Thus, we hypothesize that models should intentionally and explicitly limit themselves to a particular time scale. This time scale should be chosen based on the needs of the application. In theory, smaller time scales are more desirable since one can always scale ‘up’ in time but scaling ‘down’ requires assumptions which are often inaccurate, but in reality small time-scale models which predict accurately at both large and small time-scales may be prohibitively complex.  For simulations of highly detailed, longitudinal data, small time-scale and large time-scale models could potentially be combined as submodels into a single model, but a generalized approach to this combination.
+
+As an illustration of the concept of multiple time scale modeling, consider the following simple models of sleep behavior.
+
+The daily model of sleep simply assumes that sleep occurs between 23:00 and 7:00 every night.
+
+awake                 --------------------------------        
+asleep ---------------                                --------
+           00            07                               23     24
+
+The weekly model of sleep assumes that sleep on the weekends is 1 hour greater than sleep during the workweek.
+
+hrs   |9 ---                           ---
+of    |8      ---       ---       ---     
+sleep |7           ---       ---
+         S    M    T    W    T    F    S    
+
+The seasonal model of sleep assumes that more sleep occurs in the winter than the summer.
+avg
+hrs   |9                          --------
+of    |8  ---            ---------          
+sleep |7     ------------          
+         Spring   Summer    Fall   Winter    
+
+Now that we have some models, let us consider some simulations of sleep patterns. Our virtual humans will be Alice, Bob, and Charlie modeled by the daily, weekly, and seasonal models respectively. Let’s see what Happens when we simulate a full year of data and look at it at different scales:
+
+ Asleep/Awake state on the 2nd Tuesday in Dec 
+Alice
+              --------------------------------        
+---------------                                --------
+    00            07                               23     24
+Bob
+??????????????????????????????????????????????????????????????
+    00            07                               23     24
+Charlie
+??????????????????????????????????????????????????????????????
+    00            07                               23     24
+
+At this time scale, it is unclear how to distribute the higher time scale knowledge from “hours sleep per night” from Bob and Charlie’s models to the “hourly asleep/awake state” variable. Bob and Charlie's models do not explicitly define the sleep/wake state construct, and they also have no defined links of distribution that might let us get sleep/wake state from “hours sleep per night”.
+Some assumptions have to be made about converting between these constructs in order to proceed. The most mathematically obvious is to assume an even distribution throughout the day which sums to the model’s value of “hours of sleep per night”, but this results in Bob getting seven twenty-fourths of an hour of sleep every hour of the day and likewise Charlie getting 9/24 hours of sleep every hour. This is especially problematic for the awake/sleep state construct, since it is a nominal - not numerical - variable.
+
+ Hours of sleep/night of the first week of December 
+Alice
+|9                            
+|8 ---  ---  ---  ---  ---  ---  ---     
+|7           
+   S    M    T    W    T    F    S    
+Bob
+|9 ---                           ---
+|8      ---       ---       ---     
+|7           ---       ---
+   S    M    T    W    T    F    S    
+Charlie
+|9 ---  ---  ---  ---  ---  ---  ---                                
+|8  
+|7           
+   S    M    T    W    T    F    S  
+At the weekly time scale, Bob’s model works perfectly and the other models have also been able to come up with a value. For Alice’s daily model we are able to sum over amount of sleep encoded in “sleep/awake state” to arrive at a value. In order to do this, we have utilized a link of aggregation between the “sleep/awake state” construct and the “hours of sleep per night” construct. Similarly, a link of distribution is used to assume that the distribution sleep is flat across weeks in the seasonal model.
+
+
+\section{HBM specification process}
+This section outlines methodology for the behavioral scientist who wishes to construct a HBM for use in a JiTAI application.
+
+% TODO: this is a sub-process for step 3 of the 10-steps /cite
+
+%TODO copy from…?
+build an info-graph
+specify connection formulas
+
+\section{HBM Usage}
+In this section we discuss the utility of a HBM from a practical standpoint.
+
+\subsection{HBMs for Behavioral Theory}
+The development of an HBM requires exploration of human behavior at unprecedented time-scale and detail.
+Just the process of defining a detailed a priori model can lead to new insights and research questions /cite{Erik?}.
+
+Unification of existing behavioral models into this common paradigm might enable better collaboration between proponents of different theories.
+
+Model acts as hypothesis
+goodness-of-fit vs data
+
+\subsection{HMBs for JiTAI Design}
+Connecting interventions to models
+% TODO interventions should be designed with model in mind
+%TODO define a priori expectation of effect, then compare to data
+
+\subsection{HBMs for JiTAI Optimization}
+given expectations of effects, optimize delivery by brute-force exploration
+
+could improve effect understanding using online learning
+
+could adapt the model as mismatches are uncovered
+
+
+
+example of HBM usage (using example JiTAI from intro)
+additional insights from modeling
+observed vs a priori intervention effect
+how could delivery be improved?
+chronological usage steps:
+a priori model for intervention design
+helps researchers formulate research questions
+model used in intervention application 
+to adapt/time interventions
+model fitted to experimental data post-study
+goodness-of-fit as evaluation of theory
+can search for alternative models to better fit data
+
 
 \begin{thebibliography}{4}
 
