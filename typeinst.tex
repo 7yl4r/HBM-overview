@@ -34,10 +34,10 @@
 \mainmatter  % start of an individual contribution
 
 % TITLE 
-\title{ Contextual Persuasion Modeling : How to Explain Intervention Tailoring to a Programmer }
+\title{ Formalization of Computational Human Behavior Models for Contextual Persuasive Technology }
 
 % SHORT TITLE
-\titlerunning{Contextual Persuasion Modeling}
+\titlerunning{CHBM Formalization}
 
 % the name(s) of the author(s) follow(s) next
 %
@@ -56,7 +56,7 @@
 }
 
 % SHORT TITLE (AGAIN)
-\authorrunning{Contextual Persuasion Modeling}
+\authorrunning{CHBM Formalization}
 % (feature abused for this document to repeat the title also on left hand pages)
 
 % the affiliations are given next; don't give your e-mail address
@@ -85,7 +85,16 @@ tylarmurray@mail.usf.edu
 
 
 \begin{abstract}
-TODO
+In theory, Just-in-Time Adaptive Interventions (JiTAIs) promise to empower personal behavioral goals by optimizing interventions to situational context and user behaviors.
+In practice, development of a JiTAI represents a major feat which will require integration of several emerging research areas and collaboration between behavioral scientists, systems engineers, and software designers.
+This paper outlines open challenges facing the development of JiTAIs and discusses the use of modeling as a common ground between behavioral scientists designing interventions and software engineers building applications.
+We propose that Computational Human Behavior Modeling (CHBM) has the potential to help create better behavioral theories, enable real-time ideographic intervention optimization, and facilitate more robust data analysis techniques.
+
+First, a small set of definitions are presented which to clarify ambiguities and mismatches in terminology between these two areas.
+Next, existing modeling concepts are used to formalize a modeling paradigm designed to fit the needs JiTAI development methodology.
+Finally, potential benefits and open challenges of this modeling paradigm are highlighted through examination of the model-development methodology, run-time user modeling, and model-based data analysis.
+
+Thus, this paper offers supporting terminology, the CHBM formalization, and a set of open challenges to promote the interdisciplinary discussion needed to push forward the emerging field of JiTAI engineering.
 
 \keywords{
   TODO
@@ -118,106 +127,78 @@ Following definitions, we propose that by formalizing the CHBM underlying persua
 In this section we present a look at how the concept of a CHBM might be applied to address open issues holding back JiTAIs and we highlight the remaining issues which must be addressed to make Just-in-Time Adaptive Interventions a reality.
 
 \section{Selected Definitions}
+% TODO: remove quotes and paraphrase+cite instead?
+
 In this section we present definitions and design considerations relevant to human-behavior modeling from a theory-agnostic standpoint so that different modeling paradigms can be described under a common foundation.
 This set of definitions draws from both the area of HCI user-modeling and the extant paradigms of human behavior modeling in behavioral science in an attempt to synthesize a pragmatic language for use in the development of persuasive technology by behavioral scientists and application developers alike.
-\subsection{Just-in-Time}
-Nahum-Shani et al. summarize the cross-disciplinary concept of Just-in-Time (JIT) as “the effective provision of timely support, operationalized by offering the type of support needed, precisely when needed, in a way that minimizes waste (i.e., defined as anything that does not benefit the person) and accommodates the real-life setting in which support is needed.”
-The primary focus of the JiT intervention approach is to attempt to intervene in the times when individuals are most vulnerable to negative behavior or receptive to positive change \cite{Ben-Zeev et al., 2014; King et al. 2013}, which may arise anytime throughout the day \cite{Fletcher, Tobias, and Wisher, 2007; Witkiewitz and Marlatt, 2004}.
+
+\paragraph{Treatments} are defined by M.C. Kaptein \cite{kaptein2015formalizing} as the set of messages or feedback a user receives from a persuasive application. 
+The term treatments seems synonymous with interventions in usage, but a single treatment should be used to unambiguously represent a single instance of user-interaction, whereas a single intervention may represent a set of interactions given as a dose.
+
+\paragraph{Just-in-Time (JiT)} is a cross-disciplinary concept defined in the context of behavioral interactions by Nahum-Shani et al. as “the effective provision of timely support, operationalized by offering the type of support needed, precisely when needed, in a way that minimizes waste (i.e., defined as anything that does not benefit the person) and accommodates the real-life setting in which support is needed.” \cite{nahum2014}
 Thus, for an intervention to be considered Just-in-Time (JiT), it must attempt to deliver an intervention immediately before or after an event associated with the target behavior. 
 For example, a smoking cessation JiT intervention may deliver an intervention in response to increased craving.
-It is important to note here that the term “event” is used to represent any exact set of circumstances over any predefined length of time.
-The targeted event can therefore represent not only “behavioral events” (such as a jog, smoking a cigarette, commuting to work), but also an interval of availability \cite{???}, a “meaningful moment” \cite{???}, or any “optimal time” \cite{???} defined by a match between a set of observed datapoints and a set of datapoints which define the event archetype.
+It is important to note here that the term \emph{event} is used to represent any exact set of circumstances over any predefined length of time.
+The targeted event can therefore represent not only \emph{behavioral events} (such as a jog, smoking a cigarette, commuting to work), but also an interval of availability \cite{???}, a “meaningful moment” \cite{???}, or any “optimal time” \cite{???} defined by a match between a set of observed datapoints and a set of datapoints which define the event archetype.
 
-Though proof-of-concept studies have shown positive results delivering interventions just-in-time for ??? \cite{???}, “very limited behavioral research has been devoted to identifying markers of receptivity, and we have no robust models that can clarify how receptivity can shift as a function of continued exposure to specific types of support. [...] Much more work is needed in this domain.“ \cite{nahum2014}
-subsection{adaptive}
-For an intervention to be considered adaptive, it must utilize dynamic (time-varying) “information from the person (e.g., changes in psychological distress, response to an intervention, intervention adherence) [...] to make intervention decisions repeatedly in the course of the intervention (e.g., changing the type, dosage, or timing of intervention delivery).” \cite{nahum2014}
-
+paragraph{Adaptive} interventions must utilize dynamic (time-varying) “information from the person (e.g., changes in psychological distress, response to an intervention, intervention adherence) [...] to make intervention decisions repeatedly in the course of the intervention (e.g., changing the type, dosage, or timing of intervention delivery).” \cite{nahum2014}
 An adaptive intervention is one that responds in real-time to the changing needs of the participant by tailoring the intervention itself based on situational context or the recent behavioral history of a user. 
 For example, a weight loss trial might attempt to remove soda from a participant’s diet and then move on to the next goal if the intervention was successful.
 Similarly, consider the use of step goals to increase physical activity for an obese individual - the goals may start off at a realistic level (1000 steps/day) and then build up slowly as the individual’s ability progresses.
-Lastly, consider “when s/he is around other people, providing certain types of support (e.g., feedback) might jeopardize the person’s privacy (De Costa et al., 2010).” \cite{nahum2014}
 
-“With regard to opportunities for positive change, various learning and motivational theories highlight the importance of concepts such as shaping (i.e., training by reinforcing successively improving approximations of a desired behavior: Bouton, 2007; Ferster and Skinner, 1957) and teachable moments (i.e., a time when a person is more likely to internalize information and take action; Fisher, Piazza, and Roane, 2011; Murimi et al., 2014; Leist and Kristofco, 1990).“ \cite{nahum2014}
-\subsection{individualized}
-Nahum-Shani et al. define individualization as the “use of [static] information from the individual to make decisions about when, where and how to intervene.” \cite{nahum2014}
+\paragraph{Individualization} is defined by Nahum-Shani et al. as the “use of [static] information from the individual to make decisions about when, where and how to intervene.” \cite{nahum2014}
 Thus, an intervention is individualized if “relatively stable information from the person (e.g., gender, baseline severity of symptoms) is used to make intervention-related decisions (e.g., to offer intervention package A or B)” \cite{nahum2014}
 For example, a stress-relief intervention regimen may utilize relaxing music based on the subject’s favorite songs at study initialization, or a participant’s favorite color may be used as the basis for the user interface color palette.
 
-One might consider a user’s manually applied application settings to be a (crude) form of individualization controlled by the user.
-Allowing the user to specify their preferences reveals differences between users, which might be thought of as an expression of the user’s individual traits.
-
-It is important to note that the static information used to tailor the intervention generally does not include the “personality” of the user.
-Since the concept of personality has deep and complex roots in behavioral science, it may be considered separately as a special case of individualization based on established personality measures.
-\subsection{personalized}
-Personality is a long revered and reviled construct in psychology with many well-developed and validated measures, which are generally unutilized in the world of JiTAIs. 
-Given that personality is (usually) considered a stable trait, an intervention application might be tailored before deploying based on a personality assessment.
-
-...
-
-Adapting to the user’s personality is therefore considered separate from the concept of an “Adaptive Intervention” which adapts according to situations and behaviors, and distinct from “intervention individualization”, which adapts the intervention regimen based on static variables not considered a part of existing theories of personality.
-\subsection{JiTAIs}
-Nahum-Shani et al. “conceptualize the JITAI as an intervention design that uses a dynamic form of individualization to operationalize the provision of JIT support. Specifically, JITAIs operationalize the individualization of the selection and delivery of intervention options based on ongoing assessments of the individual’s state and ecological context, with the goal to offer the right type of support precisely when, and only when, the person is in a state of vulnerability/opportunity and receptivity” /cite{nahum2014}.
-Thus, JiTAIs are interventions which attempt to leverage the benefits of being both “adaptive”, and “just-in-time”. 
-
-JiTAIs are an active area of research spanning nearly all applications of persuasive mHealth technology, including:
-physical activity (King et al. 2013; Consolvo et al. 2008), 
-drug abuse (Dennis, Scott, Funk, and Nicholson, 2014), 
-alcohol use (Witkiewitz et al., 2014; Gustafson et al., 2014), 
-smoking cessation (Riley, Obermayer, and Jean-Mary, 2008), 
-obesity/weight management (Patrick et al., 2009), 
-and mental illnesses (Ben-Zeev et al., 2014).
-
-Though JiTAIs offer much for the future of preventative medicine and behavior change, more work is needed to make JiTAIs a reality.
-“Current health behavior theories and related empirical evidence paint a largely static picture of human behavior, cognition and emotions; they fail to capture the dynamic processes underlying the emergence of a vulnerable state or the adoption and maintenance of healthy behaviors (Spruijt-Metz et al., under review). Even dynamic models that acknowledge the role of episodic factors in health behavior processes (e.g., the dynamic model of relapse; Witkiewitz and Marlatt, 2004) do not specify the temporal nature of each factor in a way that informs when and how to intervene. Although many health behavioral models acknowledge individual differences in response to treatment, in most cases these models can only inform the most basic form of individualization (i.e., they use single time point factors like age, gender, or baseline symptom severity to make intervention decisions) rather than the dynamic individualization required to operationalize JIT support. Finally, existing intervention models often adopt a one-size-fits-all approach to intervention provision (Drotar and Lemanek, 2001; Marcus et al., 2000; Sorensen, Emmons, Hunt, and Johnston, 1998), failing to provide actionable insights with regard to the various elements of individualization articulated above.” \cite{nahum2014}
-Thus, novel modeling architectures and methodologies may be needed to overcome some of these shortcomings of existing JiTAI applications.
-\subsection{Human Behavior Model}
-In principle, persuasive interventions are based on an underlying  model of the subject and their behavior. 
-This Human Behavior Model (HBM) could be implicitly or explicitly defined.
-An implicit model is one that is expressed through the behavior of the designed system. 
+\paragraph{Human Behavior Models} (HBMs) are the user models underlying the design of persuasive interventions.
+HBMs can be implicitly or explicitly defined.
+An \emph{implicit} model is one that is expressed through the behavior of the designed system. 
 For instance, an intervention which delivers eating-behavior guidelines daily at noon has an implicit user model which states that users are awake and likely to eat soon at midday.
 The intervention design reveals the underlying model.
+In contrast, an \emph{explicit} model  defines the user model underlying the operating principles of the intervention. This model is often based on the operationalization of a particular theory (or theories) which have guided the design of the intervention.
 
-In contrast, an explicit model  defines the user model underlying the operating principles of the intervention. This model is often based on the operationalization of a particular theory (or theories) which have guided the design of the intervention.
+\section{Computational Human Behavior Models}
+A Computational Human Behavior Model (CHBM) is defined here as a mathematical, explicit model which describes how context is transformed into a behavioral outcome through the internal state of the human system.
+In summary, a Computational Human Behavior Model (CHBM) should have: 1) a set of context, state, and behavior variables, 2) a set of computations which define behavior variables as a function of state which is itself a function of context, 3) a logical abstraction which allows researchers to internalize the model’s behavior such that they may be better able to estimate control of the human system in general, and lastly 4) guidelines regarding the applicable population and time-scale of the CHBM (i.e. in what populations is the CHBM most/least valid, and at what time-scale can the CHBM simulate realistic predictions?). 
 
-The distinction between the terms model and theory as used here is an important one; in existing literature there exists some overlap and ambiguity regarding the use of the terms so we provide short definitions here.
+\subsection{Characteristics of a CHBM}
+\subsubsection{User Features: Context, State, Behavior}
+A distinguishing feature of a CHBM is the separation of the subject definition into environmental \emph{context}, internal \emph{state}, and \emph{behavior} variables.
+In reality, an individual represents an inseparable component within the larger environment, but this simplification segments out the human system for definition.
 
-The preferred definition of a theory given by Davis, Campbell, Hildon, Hobbs, and Michie \cite{davis2014} states that a theory is “a set of concepts and/or statements [...] that accounts for what is known, and explains and predicts phenomena.”
-A theory describes the causality of events, but does not provide quantitative predictions.
+Dey et al (2001) performed an extensive literature search to define an agent’s context as: “any information that can be used to characterize the situation of entities (i.e., whether a person, place, or object) that are considered relevant to the interaction between a user and an application, including the user and the application themselves. Context is typically the location, identity, and state of people, groups, and computational and physical objects.” 
+In most cases, it is sufficient to define context as a set of selected information from the environment available for inflow into the human system, but contextual information from the environment may be summarized and represented in countless ways, depending on the theories used to inform the model.
+In the real world, consider this to be everything that is observed by the senses. 
+Some of this information will alter the internal state of the human system, but some may not. 
+The set of internal state variables which define the inner workings of the human system are dependent only on past states and the current context. 
+In the real world, internal state includes all information stored in the chemical and physical  arrangement of our bodies. 
+In order to make the model tractable, the mass of information is summarized into a set of meaningful constructs.
+Behavior can be defined in many ways, but in a CHBM behavior is defined as any flow of information out of the human system and into the environment.
+Information flowing into a CHBM comes from the environment around an individual (the context) as an inflow which is independent of the individual’s state in this instant.
+Similarly, information flowing out of a CHBM (as behaviors) represents actions the individual is taking to impact the environment.
 
-The term model as used here is best defined by Spruij-Metz and Nilsen \cite{spruijtmetz2014} as an empirical, quantifiable, and testable construction which may be informed by multiple theories.
+\subsubsection{Relationships Between User Features}
+The relationships between context, state, and behavior variables in a CHBM must be defined computationally.
+The functional form of these computations is not constrained in this definition, theoretically allowing for the representation of any intervariate relationship.
+There are numerous benefits to keeping the functional form of these relationships simple and homogenous across variables.
+Last, a simple formulation is more easily understood, allowing for a straightforward interpretation and abstraction of the model behavior.
 
-Thus it can be said that a theory is a conceptualization which may inform a model, whereas a model is a mathematical construction that quantifiably defines a system.
-As an example, consider the Theory of Planned Behavior \cite{Bandura???} as the primary driving theory behind Rivera/Dong/??? \cite{???} et al.’s model of the human system which puts a particular focus on gestational weight gain/smoking/???.
-
-Theories paired with causal descriptive models provide means to conceptualize and predict human behaviors.
-Such causal descriptive models inform our understanding of the human system part-by-part, but they do not form a pragmatic interconnected picture of how the human system translates past history and current context into behaviors.  
-
-
-The majority of extant approaches utilize nomothetic models focused on constructs that remain relatively static over time such as demographic factors, psychiatric diagnoses, and patterns of high-risk behavior \cite{Spruijt-Metz, Nilsen, and Pavel, 2014}.
-A JiTAI application requires that very specific details are given about nature and dynamics of the influence of interventions, the internalization of contextual information, and subject behaviors.
-If these details are not given, then simple assumptions are used to fill in the gaps based on the developer’s intuition (or oversight) and implicit modeling assumptions are added.
-In short, extant Human Behavior Models are insufficiently detailed to fully inform a modern digital health intervention \cite{riley2011}.
-The (often poorly documented) assumptions injected or overlooked as the implicit model materializes may significantly influence the power of a JiTAI, and current literature provides little guidance regarding the model structure or predictions needed to scientifically inform JiTAI development.
-
-It stands to reason that more detailed models and more realistic modeling assumptions may lead to better JiTAIs, but the process of creating models of human behavior at the level of detail needed requires a paradigm shift.
-Methods for translating between existing causal-descriptive models and dynamical systems formulations have been explored for TODO: APPLICATIONS \cite{csel?}. 
-These formulations, however, also include details and concepts which --- though they are usually overlooked by existing behavioral models --- can represent important aspects of behavioral theory.
-Including these concepts requires that more behavioral science must be injected into model, making this is a task which requires both detailed knowledge of the applicable behavioral science as well as familiarity with systems modeling.
-\subsection{Computational Human Behavior Model}
-A Computational Human Behavior Model (CHBM) is defined here as an explicit, mathematical description of how context is transformed into a behavioral outcome through the internal state of the human system.
-This definition includes no constraints on the mathematics that govern variable relationships, the theories underlying the CHBM, or on the way internal state is abstracted.
-CHBMs are a subclass of Human Behavior Models which obey a set of conventions put in place to improve the utility of CHBMs with regards to JiTAIs and persuasive technology in general.
-
-The mathematical definition of a CHBM can provide idiographic insight, i.e. it may be used to forecast behaviors given a context history and the anticipated future context or predict behavioral phenomenon for a particular individual, but a CHBM should also provide nomothetic abstraction(s) which allows researchers to anticipate the general behavior of a population.
+\subsubsection{Heuristic Interpretation}
 Statistical models trained on data do qualify as CHBMs in that they can define the relationships between state and context, but typically do not incorporate a logical abstraction of cognition and instead treat the internal state as a “black box”.
 This abstraction is essential when considering the process of JiTAI design, since the search-space available to a JiTAI designer can only be approached through heuristics guided by an understanding of how the human system will generally behave under given conditions.
+The interpretation of computational relationships between variables in general terms provides nomothetic insights researchers can use to forecast user behavior without the aid of a simulation.
+Though mathematical equations themselves reveal the nature of the system, naming and describing the interpretation of specific constructs or coefficients which play pivotal roles in the model can aid in the process of internalizing model behavior.
+\subsubsection{Model Metadata}
+While a CHBM should strive to be as broadly applicable as possible, this inevitably comes at the cost of increased complexity which can make the CHBM’s nomothetic abstraction(s) intractable; there is a balance to be struck between a CHBM’s inclusivity and the clarity of the abstraction.
+For this reason, it may be important to specify the circumstances in which a given model is valid.
+It may be useful to craft a highly detailed model of a particular population, but the added complexity in this model may not justify its use in a more general population.
+This is not analogous to the issue of over-fitting in machine learning, as the model can remain accurate across the population; the primary reason for limiting the number of variables or the functional complexity of relationships is to preserve the heuristic understanding of the model.
 
-\subsection{HBM info-flow graph}
-There are countless approaches to systems modeling, but concepts and methods ought to be incorporated and fused when possible in their application to behavioral science.
-The following specification will allow for the formal description of an HBM, providing a standard approach to describing, designing, and visualizing human behavior models for personal forecasting .
+\subsection{Creating a CHBM}
+The following specification will allow for the formal description of a CHBM, providing a standard approach to describing, designing, and visualizing human behavior models for persuasive applications.
 
-For the representation of an HBM, we define a network graph to describe the flow of information between nodes.
-We argue that the most intuitive representation in this case is one which uses a directed graph wherein edge arrows represent the flow of information between nodes.
+A network graph is an effective abstraction to describe the relationships between nodes in a CHBM.
+In this case a directed graph wherein edge arrows represent the flow of information between nodes is used.
 Thus, a directed graph edge from node A to node B indicates that information flows from node A into node B. 
 
 \begin{centering}
@@ -227,11 +208,10 @@ Thus, a directed graph edge from node A to node B indicates that information flo
   
 This choice of notation is in agreement with graphs used in information theory, communications models, and behavioral science.
 In contrast, some graphing paradigms (such as probabilistic graphical models and software design) prefer to use notation wherein an edge is used to represent dependency.
-In these paradigms edges may be read from tail to head as "depends on" or similar.
 
 While the network graph shows the connectivity of a model, it fails to indicate the meaning of each connection.
 In the majority of existing applications, the mathematical form of the relationship is implied or else it is neglected completely.
-For instance, path diagrams from the behavioral sciences frequently denote dependence and do not specify functional form.
+For instance, path diagrams from the behavioral sciences frequently denote causal dependence and do not specify the functional form of the causal relationship.
 Adding even further to the confusion is the notion that these graphs are often developed using different statistical analyses which may make other assumptions about the functional definition of inter-variate dependency.
 The most common analyses assess linear relationships between variables, and thus it is perhaps reasonable to assume that this is the intention of most authors.
 Assuming this is the case we can return to our simplistic example in Graph 1 and interpret the implied relationship as:
@@ -255,14 +235,21 @@ $B(t) = coeff_{ab}A(t) + coeff_{cb}C(t) + const_b$\\
 \small{Equation 2: Combining multiple inflows via sum is referred to as the superposition principle and is the defining characteristic of linear systems (not to be confused with this linear formulation)}
 \end{centering}
 
-Using this formulation, the general form of our HBM is expressed via the network graph alone (perhaps along with a statement about what edges mean).
+Using this formulation, the general form of our HBM is expressed via the network graph alone.
+The general solution of an HBM does not require definition of the constants, but a simulation cannot be run until some numerical value is assumed. 
+These constants often have theoretical significance in that they often have meaningful influence upon system behavior. 
+Scaling-coefficients, for instance allow for relative weighting of each inflow. 
+Similarly, the coefficients of a dynamical equation define how quickly variables react to a change ``upstream''.
 To express an ideographic implementation of this general model, we must also include a table of coefficient values. 
 
 This linear, homogeneous-graph representation is useful, but also very limited.
 One important feature which this formulation does not take into account is the dynamics of the relationship.
-This is very important for human behavior modeling because the variables in a HBM will often respond with some delay.
-This assumption is fine for many applications, but we argue that this is a very poor assumption for human behavior models. What if A is influenced by B but there is some lag before the effect manifests?
-What if A is influenced by B, but only if B is above some threshold value? What if A is influenced by the rate of change in B rather than the value of B itself? All of these scenarios cannot be expressed using this simple linear relationship. 
+For instance, the above linear model assumes that there is no delay between variables.
+This assumption is fine for some applications, but this is a very poor assumption for human behavior models. 
+What if A is influenced by B but there is some lag before the effect manifests?
+What if A is influenced by B, but only if B is above some threshold value? 
+What if A is influenced by the rate of change in B rather than the value of B itself? 
+All of these scenarios cannot be expressed using this simple linear relationship. 
 
 To resolve some of these issues, a differential equations can be used to describe the relationship between variables as described by Dong et al.\cite{dong2012dynamical}. 
 Using the differential formulation our equation for B in Graph 1 becomes:
@@ -271,21 +258,16 @@ Using the differential formulation our equation for B in Graph 1 becomes:
 $B(t) = coeff_{ab}A(t-\theta_{ab}) - \tau_{b}\frac{dB}{dt} + const$\\
 \end{centering}
 
-Just as before, our general model is not expressed entirely through the graph, and an ideographic example is specified by providing table of coefficient values.
+Just as before, our general model is not expressed entirely through the graph, and an  ideographic example is specified by providing table of coefficient values.
 Our table is now quite a bit larger, but these coefficients have meaningful definitions which relate to our theory.
 While this formulation offers a huge improvement over the linear formulation, we can still imagine relationships which it cannot express.
-Thus, perhaps a graph-wide assumption that each edge represents a differential equation is not general enough for our HBM specification. 
 
 It should be noted at this point that although the linear formulation is too simple to express the dynamics of the differential formulation, the differential formulation is capable of expressing linear relationships.
 This is accomplished by setting coefficients of dynamical components to 0.
 One might think, then, that there is some general formula which could express any functional form, and that this form should be used to express the relationships between variables in our HBM graphs.
 While such formulations do exist (such as Taylor or Fourier series approximations or even ANN-based relations), this usage tends to make the model difficult to understand and to simulate with.
-Indeed, linear and differential formulations are in such widespread use because of the relative ease with which we can understand and solve them. 
-% An additional problem raised by this approach is that of redundant formulations.
-% As a formulation grows in complexity there are an increasing number of solutions which may fit our requirements equally well, creating more potential for confusion between researchers.
-% Formulations could even subvert the "arrow direction" by drawing information contrary to our original choice of notation.
-% The graph can then no longer be considered a directed graph, and the meaning of an edge becomes less clear.
-Additionally, the table of coefficients needed to express an ideographic case of the model quickly becomes prohibitively large, and the effect of each coefficient on the outcome is not intuitively meaningful.
+Linear and differential formulations are in such widespread use because of the relative ease with which we can understand and solve them. 
+Additionally, the table of coefficients needed to express an idiographic case of the model quickly becomes prohibitively large, and the effect of each coefficient on the outcome is not intuitively meaningful.
 
 Let us now consider the case where a graph-wide assumption is \emph{NOT} made.
 That is, we will specify the functional form of each node individually so that each edge on the graph may be linear in form while another may be differential.
@@ -339,14 +321,11 @@ In conclusion, we propose that an HBM should be specified using the following ru
   \item when choosing a formulation, simplicity and clarity is second only to consistency
 \end{enumerate}
   
-Thus a HBM specification must include:
+Thus a CHBM specification must include:
 \begin{enumerate}
   \item An information flow graph
   \item either: a graph-wide formulaic assumption or a formulation table 
 \end{enumerate}
-
-\subsection{User Interface Design for HBM-builder }
-The flow chart shown in figure \ref{HBM-build-process} represents the movement of a user through the process of building an HBM using the proposed information flow graph specification.
 
 \begin{figure}[!t]
   \centering
@@ -355,95 +334,9 @@ The flow chart shown in figure \ref{HBM-build-process} represents the movement o
   \label{HBM-build-process}
 \end{figure}
 
-It is important to note that the process of building is pseudo-linear; users will likely want to jump back to an arbitrary point and as the model takes shape. 
+It is important to note that the process of building a CHBM is pseudo-linear; users will likely want to jump back to an arbitrary point and as the model takes shape. 
 As the user moves through the process, they will re-assess the meaning of variables and connections and their model will solidify. 
-UI for an HBM-building tool should enable easy backtracking and should work to provide feedback on the characteristics of the model early. 
-Keeping the non-linearity of this process in mind, we will now walk through the diagram and address design considerations for each part of the process.
 
-\subsubsection{Draw the Diagram}
-This task involves the creation and connecting of all nodes in the diagram. 
-Nodes and their connections should be primarily based in theory, so a user should be able to build a first draft of their model with little feedback. 
-Once the formulas for each node have been specified, however, it is likely that the user will want to return to this step and reassess the network. 
-Several paradigms diagram-drawing have been well tested, but there are essentially two prevailing options:
-1) drag-and-drop node creation with drag-to-connect edges, and 2) textual ``diagram specification language'' (DSL).
-
-Drag-and-drop modeling has the benefit of being intuitive, but nodes can be difficult to position to reduce edge overlap leading to users often distracted trying to optimize the layout.
-
-The use of a DSL can be much faster than mouse-reliant alternatives, and also has the benefit that searching/finding nodes for modification is as easy as textual search of the DSL.
-On the other hand, DSL parsing errors can be a major source of confusion and users may be more frustrated as they attempt to master the markup language.
-
-
-\subsubsection{Use Graph-Wide Rule?}
-This choice can come before or after the initial drawing of the graph, since it is likely the user has a graph-wide assumption in mind when starting the process. 
-This choice determines whether or not the interface for specifying nodes individually is shown, so it is logical to think of the "none", "node-specific", or "node-unique" option as one of the choices available here. 
-As an example, some graph-wide rules which may be implemented include a probabilistic graphical network, linear sum assumption, fluid-flow analogy.
-
-If a graph-wide rule is set, the formulation section for each node should show as locked to the rule's respective formulation. 
-Editing an individual node's formulation will disable the graph-wide rule, and should require confirmation from the user. 
-The interface for choosing one of these rules may be as simple as a select-option box or may include a detailed rule description and example. 
-An additional feature which may be useful is to allow for user-defined graph-wide rules. 
-In this case, users might choose "create new rule" and an interface to allow users to edit and save graph-wide rules is needed.
-
-% \subsubsection{For Each Node}
-% 
-% Items encapsulated by the "for each node" swim-lanes must be executed for each node in the graph. 
-% The graph-wide-rule-yes case differs from the graph-wide-rule-no case only in that the graph-wide-rule-no case requires the additional step of setting the formulation at each node.
-
-\subsubsection{Choose a Formulation}
-This item is identical to the graph-wide rule choice, except that it applies only to a single node. Similar design considerations apply, and user-defined choice is even more important at this scale.
-
-\subsubsection{Define Model Constants}
-The general solution of an HBM does not require definition of the constants, but a simulation cannot be run until some numerical value is assumed. 
-These constants often have theoretical significance in that they often have meaningful influence upon system behavior. 
-Scaling-coefficients, for instance allow for relative weighting of each inflow. 
-Similarly, the coefficients of a dynamical equation define how quickly variables react to a change ``upstream''.
-UI for setting these constants could be as simple as a numerical input for each coefficient's name, but additional model details provided here may be of great benefit to the model designer. 
-
-First, UI should include equation-specific descriptions of the constants whenever possible. This means that a separate UI for each formulation type is necessary. 
-Second, adjustment of coefficients would ideally show changes in the dynamics of a node's value in real-time. 
-This can take the form of a time-series chart of the selected node's numerical value over time along with (editable) time-series for the inflows. 
-Adjustment of these inflow series may also take a number of different forms. 
-Third, model creators may want to set these coefficients in three different ways: 
-\paragraph{Set the coefficient value to a constant}
-All simulations derived from this general solution will have this exact value.
-
-\paragraph{Set a probability distribution for the coefficient}
-Simulations derived from this general solution will select a numerical value based on the given distribution. 
-This distribution may be learned from a training dataset, or bounds may be set for later training. 
-
-\paragraph{Leave the variable unbounded and assume a flat probability distribution}
-This selection is identical to option 2 with a flat distribution from -infinity to +infinity, but may deserve special inclusion due to the comparatively low complexity (making this option appealing for novice users).
-
-These different ways of defining coefficients in a HBM become significant when it is time to run simulations and compare model results to real data. 
-Last, model creators may want to use a measured value to set the value of these coefficients. In this way, one measured input (in real life), such as big-5 personality type, can be used to set the value of multiple coefficients across different variables in the model.
-
-% \subsubsection{Nodes Left?}
-% %This is the most simple element of the flowchart. 
-% No if there are unspecified nodes remaining, yes if all are complete. 
-% It should be left to the user to confirm model-completeness, however, since a great deal of model-tweaking is likely now that simulation results can be displayed.
-% 
-% \subsubsection{Next Node}
-% Progression downstream through the model should be relatively straightforward in the case of tree-like models, but feedback loops can cause issues here. 
-% Perhaps the best paradigm here is to progress as naturally as possible, but allow the user to over-ride and select any node. 
-% This interaction mode will also be needed to allow for later model-tweaking. 
-
-
-A distinguishing feature of a CHBM is the separation of environmental \emph{context}, internal \emph{state}, and \emph{behaviors}.
-In reality, an individual represents an inseparable component within the larger environment, but this simplification segments out the human system for definition.
-
-Dey et al (2001) performed an extensive literature search to define an agent’s context as: “any information that can be used to characterize the situation of entities (i.e., whether a person, place, or object) that are considered relevant to the interaction between a user and an application, including the user and the application themselves. Context is typically the location, identity, and state of people, groups, and computational and physical objects.” 
-In most cases, it is sufficient to define context as a set of selected information from the environment available for inflow into the human system, but contextual information from the environment may be summarized and represented in countless ways, depending on the theories used to inform the model.
-In the real world, consider this to be everything that is observed by the senses. 
-Some of this information will alter the internal state of the human system, but some may not. 
-The set of internal state variables which define the inner workings of the human system are dependent only on past states and the current context. 
-In the real world, internal state includes all information stored in the chemical and physical  arrangement of our bodies. 
-In order to make the model tractable, the mass of information is summarized into a set of meaningful constructs.
-Behavior can be defined in many ways, but in a CHBM behavior is defined as any flow of information out of the human system and into the environment.
-Information flowing into a CHBM comes from the environment around an individual (the context) as an inflow which is independent of the individual’s state in this instant.
-Similarly, information flowing out of a CHBM (as behaviors) represents actions the individual is taking to impact the environment.
-
-In summary, a Computational Human Behavior Model (CHBM) should have: 1) a set of context, state, and behavior variables, 2) a set of computations which define behavior variables as a function of state which is itself a function of context, 3) a logical abstraction which allows researchers to internalize the model’s behavior such that they may be better able to estimate control of the human system in general, and lastly 4) guidelines regarding the applicable population and time-scale of the CHBM (i.e. in what populations is the CHBM most/least valid, and at what time-scale can the CHBM simulate realistic predictions?). 
-On this last point it should be noted that while a CHBM should strive to be as broadly applicable as possible, this inevitably comes at the cost of increased complexity which can make the CHBM’s nomothetic abstraction(s) intractable; there is a balance to be struck between a CHBM’s inclusivity and the clarity of the abstraction.
 \section{benefits of CHBM-enabled JiTAIs}
 This section discusses the utility of a CHBM throughout the lifecycle of a JiTAI application.
 Hypothetical situations are posed to highlight the potential value of CHBM use in the JiTAI development process and show open challenges through establishment of a target user group model, application design, application implementation, data analysis, model personalization, and model iteration.
