@@ -86,8 +86,7 @@
 In theory, Just-in-Time Adaptive Interventions (JiTAIs) are a persuasive technology which promise to empower personal behavioral goals by optimizing treatments to situational context and user behaviors.
 In practice, development of a JiTAI represents a major feat which will require integration of several emerging research areas and collaboration between behavioral scientists, systems engineers, and software designers.
 This paper outlines open challenges facing the development of JiTAIs and discusses the use of modeling as a common ground between behavioral scientists designing interventions and software engineers building applications.
-We propose that Computational Human Behavior Modeling (CHBM) has the potential to 1) help create better behavioral theories, 2) enable real-time ideographic intervention optimization, and 3) facilitate more robust data analysis techniques
-  
+We propose that Computational Human Behavior Modeling (CHBM) has the potential to 1) help create better behavioral theories, 2) enable real-time ideographic intervention optimization, and 3) facilitate more robust data analysis techniques.
 First, a small set of definitions are presented to clarify ambiguities and mismatches in terminology between these two areas.
 Next, existing modeling concepts are used to formalize a modeling paradigm designed to fit the needs JiTAI development methodology.
 Last, potential benefits and open challenges of this modeling paradigm are highlighted through examination of the model-development methodology, run-time user modeling, and model-based data analysis.
@@ -106,7 +105,7 @@ One class of persuasive technologies with this aim is the ``Just-In-Time Adaptiv
 Thanks to great advances in wearable, mobile, and ubiquitous technologies increasingly rich data is now available to characterize the context of the subject for use in JiTAI applications.
 
 Researchers theorize that an intervention which can tailor based on the user and context may be an elegant solution to empower self-management of unhealthy behaviors like substance abuse, overeating, sedentary behavior, and more \cite{nahum2014}.
-These persuasive technologies aim to utilize contextual information - data collected from the subject's surroundings and history - to deliver personalized interventions at the optimal moment in time.
+These persuasive technologies aim to utilize contextual information --- data collected from the subject's surroundings and history --- to deliver personalized interventions at the optimal moment in time.
 Real-time monitoring of data to identify states of special vulnerability to poor behavioral decisions or receptivity to intervention at any given moment is possible \cite{hekler2013realizing}, but ``a major gap exists between the technological capacity to deliver JITAIs and existing health behavior models.'' \cite{nahum2014}
 Proof-of-concept applications have demonstrated the ability to adapt interventions to users \cite{dallery2014optimizing} \cite{beck2010challenges} and context \cite{brailsford2010towards} \cite{collins2004conceptual}, but using current methods the complexity of the behavioral model underlying a JiTAI application grows exponentially as the complexity of the intervention design increases. 
 Current methods for conceptualizing the human system take a piece-wise, descriptive approach, examining a phenomena in detail, but often overlooking how the model fits into the bigger picture.
@@ -143,7 +142,7 @@ Thus, for an intervention to be considered Just-in-Time (JiT), it must attempt t
 \paragraph{Adaptive} interventions must utilize dynamic (time-varying) ``information from the person (e.g., changes in psychological distress, response to an intervention, intervention adherence) [...] to make intervention decisions repeatedly in the course of the intervention (e.g., changing the type, dosage, or timing of intervention delivery).' \cite{nahum2014}
 An adaptive intervention is one that responds in real-time to the changing needs of the participant by tailoring the treatment itself based on situational context or the recent behavioral history of a user. 
 %For example, a weight loss trial might attempt to remove soda from a participant's diet and then move on to the next goal if the intervention was successful.
-%Similarly, consider the use of step goals to increase physical activity for an obese individual - the goals may start off at a realistic level (1000 steps/day) and then build up slowly as the individual's ability progresses.
+%Similarly, consider the use of step goals to increase physical activity for an obese individual --- the goals may start off at a realistic level (1000 steps/day) and then build up slowly as the individual's ability progresses.
 
 \paragraph{Individualization} is defined by Nahum-Shani et al. as the ``use of [static] information from the individual to make decisions about when, where and how to intervene.'' \cite{nahum2014}
 Thus, an intervention is individualized if ``relatively stable information from the person (e.g., gender, baseline severity of symptoms) is used to make intervention-related decisions (e.g., to offer intervention package A or B)'' \cite{nahum2014}
@@ -159,8 +158,8 @@ For example, a stress-relief intervention regimen may utilize relaxing music tre
 \section{Computational Human Behavior Models}
 The following specification will allow for the formal description of a CHBM, providing a standard approach to describing, designing, and visualizing human behavior models for persuasive applications.
 A Computational Human Behavior Model (CHBM) is defined here as a mathematical, explicit model which describes how context is transformed into a behavioral outcome through the internal state of the human system.
-In summary, a Computational Human Behavior Model (CHBM) should have 1) a set of context, state, and behavior variables, 2) a set of computations which define behavior variables as a function of state which is itself a function of context, 3) a logical abstraction which allows researchers to internalize the model's behavior such that they will be better able to estimate control of the human system in general, and 4) guidelines regarding the applicable population and time-scale of the CHBM (i.e. in what populations is the CHBM most/least valid, and at what time-scale can the CHBM simulate realistic predictions?).
-
+In summary, a Computational Human Behavior Model (CHBM) should have 1) a set of context, state, and behavior variables, 2) a set of computations which define behavior variables as a function of state which is itself a function of context, 3) a logical abstraction which allows researchers to internalize the model's behavior such that they will be better able to estimate control of the human system in general, and 4) guidelines regarding the applicable population and time-scale of the CHBM.
+%(i.e. in what populations is the CHBM most/least valid, and at what time-scale can the CHBM simulate realistic predictions?).
 The following section details each of these CHBM components, followed by a methodology which makes use of a graph representation to create and describe a particular CHBM.
 
 \subsection{Characteristics of a CHBM}
@@ -169,13 +168,13 @@ A distinguishing feature of a CHBM is the separation of the subject definition i
 In reality, an individual represents an inseparable component within the larger environment, but this simplification segments out the human system for definition.
 
 %Dey et al (2001) performed an extensive literature search to define an agent's context as: ``any information that can be used to characterize the situation of entities (i.e., whether a person, place, or object) that are considered relevant to the interaction between a user and an application, including the user and the application themselves. Context is typically the location, identity, and state of people, groups, and computational and physical objects.''
-In most cases, it is sufficient to define context as a set of selected information from the environment available for inflow into the human system, but contextual information from the environment may be summarized and represented in countless ways, depending on the theories used to inform the model.
-In reality, consider this to be everything that is observed by the senses. 
+In most cases, it is sufficient to define context as a set of selected information from the environment available for inflow into the human system, but contextual information from the environment may be summarized and represented in countless ways.
+In reality, consider context to be everything that is observed by the senses. 
 Some of this information will alter the internal state of the human system, but some may not. 
 The selection and summary of contextual data will depend both on the nature of the persuasive system and the data which is available during the experiment.
 %The set of internal state variables which define the inner workings of the human system are dependent only on past states and the current context. 
 The environmental context influences the human system, which has an internal state represented by a set of internal state variables.
-In reality, internal state includes all information stored in the chemical and physical  arrangement of our bodies. 
+In reality, internal state includes all information stored in the chemical and physical arrangement of our bodies. 
 In order to make the model tractable, the mass of information is summarized into a set of meaningful constructs.
 %Behavior can be defined in many ways, but in a CHBM behavior is defined as any flow of information out of the human system and into the environment.
 Information flowing into a CHBM comes from the environment around an individual (the context) as an inflow which is independent of the individual's state in this instant.
@@ -190,12 +189,13 @@ Last, a simple formulation is more easily understood, allowing for a straightfor
 \subsubsection{Heuristic Interpretation}
 Statistical models trained on data do qualify as CHBMs in that they can define the relationships between state and context, but typically do not incorporate a logical abstraction of cognition and instead treat the internal state as a \emph{black box}.
 This abstraction is essential when considering the process of JiTAI design, since the search-space available to a JiTAI designer can only be approached through heuristics guided by an understanding of how the human system will generally behave under given conditions.
-The interpretation of computational relationships between variables in general terms provides nomothetic insights researchers can use to forecast user behavior without the aid of a simulation.
+%The interpretation of computational relationships between variables in general terms provides nomothetic insights researchers can use to forecast user behavior without the aid of a simulation.
 Though mathematical equations themselves reveal the nature of the system, naming and describing the interpretation of specific constructs or coefficients which play pivotal roles in the model can aid in the process of internalizing model behavior.
+
 \subsubsection{Model Metadata}
 While a CHBM should strive to be as broadly applicable as possible, this inevitably comes at the cost of increased complexity which can make the CHBM's nomothetic abstraction(s) intractable; there is a balance to be struck between a CHBM's inclusivity and the clarity of the abstraction.
 For this reason, it may be important to specify the circumstances in which a given model is valid.
-It may be useful to craft a highly detailed model of a particular population, but the added complexity in this model may not justify its use in a more general population.
+%It may be useful to craft a highly detailed model of a particular population, but the added complexity in this model may not justify its use in a more general population.
 This is not analogous to the issue of over-fitting in machine learning, as the model can remain accurate across the population; the primary reason for limiting the number of variables or the functional complexity of relationships is to preserve the heuristic understanding of the model.
 
 \subsection{Creating a CHBM}
@@ -331,17 +331,14 @@ In conclusion, we propose that an CHBM should be specified using the following r
 \section{benefits of CHBM-enabled JiTAIs}
 This section discusses the utility of a CHBM throughout the lifecycle of a JiTAI application.
 Hypothetical situations are posed to highlight the potential value of CHBM use in the JiTAI development process and show open challenges through establishment of a target user group model, application design, application implementation, data analysis, model personalization, and model iteration.
+%Existing methods for modeling behavior change are limited in their utility for the average software developer, but a mathematical formulation of the human system's behavior allows developers to utilize existing methods from other engineering domains.
 
-Existing methods for modeling behavior change are limited in their utility for the average software developer, but a mathematical formulation of the human system's behavior allows developers to utilize existing methods from other engineering domains.
-
-\subsection{a priori CHBMs}
+\subsection{\emph{A Priori} CHBMs}
 Prior to development of a JiTAI, a mental model of the target user group is established.
 This a priori model represents the researcher's understanding of the user group, and the design of the intervention utilizes the model in order to predict user actions.
 This level of detail to which this model is documented varies greatly between applications, and in some cases the causal descriptive model has little grounding in existing behavioral theory \cite{prestwich2014does}.
-
 % research has (NOT?) indicated that persuasive applications with a firm basis in theory have been found to be more effective \cite{???}.
 % “Establishing a scientific model is an important step in constructing behavioral interventions (Collins, Murphy, and Bierman, 2004).” \cite{nahum2014}
-
 Nevertheless, a vague description of expected user behaviors and interactions with the persuasive technology still represents a user model.
 Existing JiTAI-like applications may not have a CHBM, but they always (sometimes informally) imply a CHBM.
 This section highlights the benefits of defining a CHBM explicitly, rather than relying on implicit behavioral theory.
@@ -365,7 +362,7 @@ The process of defining a more detailed a priori model itself can lead to new in
 When designing intervention options for a JiTAI application, researchers will consider how a treatment influences the subject in the context of the chosen user model.
 When using a CHBM, this means quantifying the treatment's effect on user context.
 For instance, consider an intervention which provides information about the health repercussions of sedentary behavior.
-Assuming our CHBM uses an adaptation of the Theory of Planned Behavior \cite{Ajzen1991theory}, this intervention targets \emph{behavioral belief} regarding sedentary behavior.
+Assuming our CHBM uses an adaptation of the Theory of Planned Behavior \cite{ajzen1991theory}, this intervention targets \emph{behavioral belief} regarding sedentary behavior.
 Since behavioral belief is part of the internal state and the treatment should be defined as part of the user's context, a context variable should be included in our model to represent external influences on behavioral belief from the environment.
 After defining the expected effect of a single treatment, the CHBM can then be used to predict a detailed account of user response.
 The use of simulations such as this in the process of designing controls is well-explored in many other areas, but is nearly unheard of in behavioral science.
@@ -383,8 +380,8 @@ This is in part due to the prevalence of abstract causal descriptive models and 
 \begin{enumerate}
     \item The process of defining a CHBM requires detailed knowledge of both the underlying behavioral theory and the mathematics. Relatively few researchers today possess the necessary skillset, especially when considering the use of dynamical systems equations.
     \item Modeling software to provide abstraction of the mathematical complexity exists for other engineering domains, but software is not directly applicable to the problem of CHBM development. %TODO how?
-    \item Software for running simulations to test the function of an a priori CHBM is non-existent, and standards for describing models, simulations, and results in this domain are not established.
-    \item Methodologies for creating an a priori CHBM are not fully established, and mappings from existing causal descriptive models (like CSEL's fluid-flow analogy) may be model-dependent.
+    \item Software for running simulations to test the function of an \emph{a priori} CHBM is non-existent, and standards for describing models, simulations, and results in this domain are not established.
+    \item Methodologies for creating an \emph{a priori} CHBM are not fully established, and mappings from existing causal descriptive models may be model-dependent.
     \item The definition of an treatment's effect on a user is a subjective process of quantifying qualities which currently have no point of reference.
 That is: how is one to know what amount of behavioral belief a specific ``sedentary activity fact treatment'' imparts?
 %Guidelines for estimating these values should become more clear after further precedent has been set, but no standards yet exist.
@@ -415,18 +412,18 @@ In contrast, optimization of treatment delivery using a CHBM can be done algorit
 %Assuming that a CHBM has been formulated by behavioral scientists prior to implementation of the designed application, the software can directly make use of the CHBM to model the user.
 Because CHBMs are computational in nature, prediction of behavior is possible given information about the user's present and future context.
 Furthermore, because the behaviors in computational models are quantitative, an application could search available treatment options to find one which produces the ideal amount of a target behavior.
-That is, given three treatment options (A, B, C) with known effect on user context, the model can be run at t+1 for each option, and the optimum result can be chosen.
-Methods for model predictive control are a well studied topic of control systems engineering, but many methods cannot be applied to generic formulations (such as the CHBM specification).
+%That is, given three treatment options (A, B, C) with known effect on user context, the model can be run at t+1 for each option, and the optimum result can be chosen.
+Methods for model predictive control are a well studied topic of control systems engineering, but many methods cannot be applied to generic formulations.
 Without a constrained form to guide optimization, all possible options must be explored with equal feasibility in a brute-force search.
 With sufficient computational power this is effective for simple problems, but this approach becomes increasingly infeasible as the number of options and the number of future steps to be considered increase.
 If the functional form describing variable relationships is constrained appropriately, however, mathematical optimizations methods can greatly simplify this problem.
 Applications of model-predictive control over intervention delivery have been explored for gestational weight gain \cite{dong2013hybrid}, smoking cessation \cite{timms2014hybrid}, and fibromyalgia treatment \cite{deshpande2014optimized} by limiting the functional form of the CHBM specification to a differential equation based on a fluid-flow analogy.
 In this way, application creators can implement software utilizing the advanced understanding of behavioral science described by the CHBM, without direct knowledge of the underlying behavioral science.
 
-Methods of optimizing the timing and adaption of interventions thus far have assumed that the effect of treatments is well known a priori.
-However, real-life users may respond very differently from the generalized model and personal ideographic models are not yet a feasible solution.
-In order to optimize intervention delivery given a set of unknown treatments, an online learning has been proposed \cite{jaimes2015calma}.
-In theory, a similar approach may be capable of producing a ideographic models of subjects which can then be generalized to improve understanding of the behavioral theory.
+%Methods of optimizing the timing and adaption of interventions thus far have assumed that the effect of treatments is well known a priori.
+%However, real-life users may respond very differently from the generalized model and personal ideographic models are not yet a feasible solution.
+%In order to optimize intervention delivery given a set of unknown treatments, an online learning has been proposed \cite{jaimes2015calma}.
+%In theory, a similar approach may be capable of producing a ideographic models of subjects which can then be generalized to improve understanding of the behavioral theory.
 
 \emph{Benefits of CHBMs for Persuasive Applications:}
 \begin{enumerate}
@@ -466,8 +463,8 @@ Additionally, unification of existing behavioral models into this common paradig
 
 \emph{Open Questions for CHBM Post-Experiment Methods:}
 \begin{enumerate}
-    \item Methods for fitting a model to experimental data (like methods for optimization) require restrictions on the functional form of the relationships between variables, and the optimum functional form is not yet obvious.
-    \item Methods for evaluating the goodness-of-fit between empirical and simulated data exist, but cutting-edge software for exploring the intricacies of data mis-match may be difficult to apply to this use-case.
+    \item Methods for fitting a model to experimental data require restrictions on the functional form of the relationships between variables, and the optimum functional form is not yet obvious.
+    \item Methods for evaluating the goodness-of-fit between empirical and simulated data exist, but cutting-edge software for exploring the intricacies of data mismatch may be difficult to apply to this use-case.
 \end{enumerate}
 
 \section{Conclusion}
@@ -505,7 +502,7 @@ It is our hope that this formative work towards Computational Human Behavior Mod
 
 \bibitem{kaptein2015formalizing} Kaptein, M. C. : Formalizing Customization in Persuasive Technologies. In Persuasive Technology (pp. 27-38). Springer International Publishing. (2015)
 
-\bibitem{jaimes2015calma} Jaimes, L. G., Llofriu, M., and Raij, A. : Calma, an algorithm framework for mobile just in time interventions. In SoutheastCon 2015 (pp. 1-5). IEEE. (2015)
+%\bibitem{jaimes2015calma} Jaimes, L. G., Llofriu, M., and Raij, A. : Calma, an algorithm framework for mobile just in time interventions. In SoutheastCon 2015 (pp. 1-5). IEEE. (2015)
 
 \bibitem{nahum2014} Nahum-Shani, I., Hekler, E. B., and Spruijt-Metz, D. : Building health behavior models to guide the development of just-in-time adaptive interventions: A pragmatic framework. Health Psychology. (2015)
 
