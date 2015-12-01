@@ -107,10 +107,10 @@ One class of persuasive technologies with this aim is the ``Just-In-Time Adaptiv
 
 Thanks to great advances in wearable, mobile, and ubiquitous technologies an increasingly huge amount of data is now available to characterize the context of the subject.
 
-Researchers theorize that an intervention which can tailor based on the user and context may be an elegant solution to empower self-management of unhealthy behaviors like substance abuse, overeating, sedentary behavior, and more \cite{nahum2014, Hekler, Patrick, and Michie, 2016}.
-Real-time monitoring of data to identify states of vulnerability or receptivity at any given moment is possible \cite{Hekler, Klasnja, Traver, and Hendriks, 2013}, but ``a major gap exists between the technological capacity to deliver JITAIs and existing health behavior models.'' \cite{nahum2014}
-Proof-of-concept applications have demonstrated the ability to adapt interventions to users \cite{dallery2014optimizing, beck2010challenges} and context \cite{brailsford2010towards, collins2004}, but using current methods the complexity of the behavioral model underlying a JiTAI application grows exponentially as the complexity of the intervention design increases. 
-Current behavioral theories focus on nomothetic and static insights that do not offer the granularity and specificity to support the full potential of JiTAIs\cite{riley2011health}.
+Researchers theorize that an intervention which can tailor based on the user and context may be an elegant solution to empower self-management of unhealthy behaviors like substance abuse, overeating, sedentary behavior, and more \cite{nahum2014}.
+Real-time monitoring of data to identify states of vulnerability or receptivity at any given moment is possible \cite{hekler2013realizing}, but ``a major gap exists between the technological capacity to deliver JITAIs and existing health behavior models.'' \cite{nahum2014}
+Proof-of-concept applications have demonstrated the ability to adapt interventions to users \cite{dallery2014optimizing, beck2010challenges} and context \cite{brailsford2010towards, collins2004conceptual}, but using current methods the complexity of the behavioral model underlying a JiTAI application grows exponentially as the complexity of the intervention design increases. 
+Current behavioral theories focus on nomothetic and static insights that do not offer the granularity and specificity to support the full potential of JiTAIs\cite{riley2011healthbehavior}.
 The current development process for JiTAI-like persuasive technologies requires close collaboration between behavioral scientists and application developers as they struggle to code-ify the model from extant behavioral theories for each individual experiment.
 The models used by a programmer to describe a \emph{user} and the models used by behavioral scientists to describe a \emph{subject}, have certain key differences which can complicate the process of JiTAI design.
 
@@ -137,7 +137,7 @@ The term treatments seems synonymous with interventions in usage, but a single t
 Thus, for an intervention to be considered Just-in-Time (JiT), it must attempt to deliver an intervention immediately before or after an event associated with the target behavior. 
 For example, a smoking cessation JiT intervention may deliver an intervention in response to increased craving.
 It is important to note here that the term \emph{event} is used to represent any exact set of circumstances over any predefined length of time.
-The targeted event can therefore represent not only \emph{behavioral events} (such as a jog, smoking a cigarette, commuting to work), but also an interval of availability \cite{???}, a ``meaningful moment'' \cite{???}, or any ``optimal time'' \cite{???} defined by a match between a set of observed datapoints and a set of datapoints which define the event archetype.
+The targeted event can therefore represent not only \emph{behavioral events} (such as a jog, smoking a cigarette, commuting to work), but also an interval of availability, a ``meaningful moment'', or any ``optimal time'' defined by a match between a set of observed datapoints and a set of datapoints which define the event archetype.
 
 \paragraph{Adaptive} interventions must utilize dynamic (time-varying) ``information from the person (e.g., changes in psychological distress, response to an intervention, intervention adherence) [...] to make intervention decisions repeatedly in the course of the intervention (e.g., changing the type, dosage, or timing of intervention delivery).' \cite{nahum2014}
 An adaptive intervention is one that responds in real-time to the changing needs of the participant by tailoring the intervention itself based on situational context or the recent behavioral history of a user. 
@@ -259,7 +259,7 @@ What if A is influenced by B, but only if B is above some threshold value?
 What if A is influenced by the rate of change in B rather than the value of B itself? 
 All of these scenarios cannot be expressed using this simple linear relationship. 
 
-To resolve some of these issues, a differential equations can be used to describe the relationship between variables as described by Dong et al.\cite{dong2012dynamical}. 
+To resolve some of these issues, a differential equations can be used to describe the relationship between variables as described by Dong et al.\cite{dongrivera2012dynamical}. 
 Using the differential formulation our equation for B in Graph 1 becomes:
 
 \begin{equation}
@@ -371,7 +371,7 @@ The mismatch between the documented theoretical model and the actually implement
 
 In addition to those assumptions knowingly made by application developers, causal descriptive modeling often contains implicit assumptions which are easily overlooked.
 For instance, the delay between a cause and effect is frequently neglected --- that is: how quickly does a participant's behavior respond to an intervention?
-The process of defining a more detailed a priori model itself can lead to new insights and research questions by eliminating these oversights and forcing critical thinking on the assumptions being made /cite{Erik/Donna?}.
+The process of defining a more detailed a priori model itself can lead to new insights and research questions by eliminating these oversights and forcing critical thinking on the assumptions being made.
 
 % TODO: expand on how dynamical modeling yields insights/research questions: 
 % The use of these interventions, particularly in context, forces far more careful description of exactly when, where, and how an intervention might produce an effect and, equally as important, exactly when, where and how an intervention will NOT produce an effect. We might intentionally ask for “outside of the skin” factors such as times, locations, situations and internal states that dictate the boundary conditions on when a  particular causal relationship will be observable or not (Hovell, Wahlgren, and Adams, 2009).  We might also need to discriminate on different “within the skin” attributes that would also define success such as gender, ethnicity, preferences (e.g., while research is increasingly exploring the utility of consuming protein from insects, cultural issues and individual differences make this solution for reducing our collective carbon footprint almost impossible to implement with some groups; Hovell et al. 2009).  These discriminations become even more important when time is taken into account as behavior, “outside the skin” and “inside the skin” factors can all vary together over time (Hovell et al. 2009). This results in clear discrimination of the boundary conditions on when an intervention might work or not, or perhaps only manifest after achieving some largely critical “tipping point,” or wear off after habituation, can further be specified and thought through (Resnicow and Page, 2008; Hekler, et al 2016).
@@ -382,7 +382,7 @@ The process of defining a more detailed a priori model itself can lead to new in
 When designing intervention options for a JiTAI application, researchers will consider how an intervention influences the subject in the context of the chosen user model.
 When using a CHBM, this means quantifying the intervention's effect on user context.
 For instance, consider an intervention which provides information about the health repercussions of sedentary behavior.
-Assuming our CHBM uses an adaptation of the Theory of Planned Behavior \cite{Bandura???}, this intervention targets \emph{behavioral belief} regarding sedentary behavior.
+Assuming our CHBM uses an adaptation of the Theory of Planned Behavior \cite{Ajzen1991theory}, this intervention targets \emph{behavioral belief} regarding sedentary behavior.
 Since behavioral belief is part of the internal state and the intervention should be defined as part of the user's context, a context variable should be included in our model to represent external influences on behavioral belief from the environment.
 After defining the expected effect of an intervention, the CHBM can then be used to predict a detailed account of user response.
 The use of simulations such as this in the process of designing controls is well-explored in many other areas, but is nearly unheard of in behavioral science.
@@ -446,7 +446,7 @@ In this way, application creators can implement software utilizing the advanced 
 
 Methods of optimizing the timing and adaption of interventions thus far have assumed that the effect of interventions is well known a priori.
 However, real-life users may respond very differently from the generalized model and personal ideographic models are not yet a feasible solution.
-In order to optimize intervention delivery given a set of unknown interventions, an online learning has been proposed /cite{Luis???}.
+In order to optimize intervention delivery given a set of unknown interventions, an online learning has been proposed \cite{jaimes2015calma}.
 In theory, a similar approach may be capable of producing a ideographic models of subjects which can then be generalized to improve understanding of the behavioral theory.
 
 CHBM benefits:
@@ -502,27 +502,55 @@ In this paper we have offered supporting terminology, the CHBM formalization, an
 
 \begin{thebibliography}{4}
 
-\bibitem{jour} Smith, T.F., Waterman, M.S.: Identification of Common Molecular
-Subsequences. J. Mol. Biol. 147, 195--197 (1981)
+\bibitem{ajzen1991theory} Ajzen, I. The theory of planned behavior. Organizational behavior and human decision processes, 50(2), 179-211. (1991)
 
-\bibitem{lncschap} May, P., Ehrlich, H.C., Steinke, T.: ZIB Structure Prediction Pipeline:
-Composing a Complex Biological Workflow through Web Services. In: Nagel,
-W.E., Walter, W.V., Lehner, W. (eds.) Euro-Par 2006. LNCS, vol. 4128,
-pp. 1148--1158. Springer, Heidelberg (2006)
+\bibitem{beck2010challenges} Beck, C., McSweeney, J. C., Richards, K. C., Roberson, P. K., Tsai, P. F., and Souder, E. : Challenges in tailored intervention research. Nursing outlook, 58(2), 104-110. (2010)
 
-\bibitem{book} Foster, I., Kesselman, C.: The Grid: Blueprint for a New Computing
-Infrastructure. Morgan Kaufmann, San Francisco (1999)
+\bibitem{brailsford2010towards} Brailsford, S. C., Desai, S. M., and Viana, J. Towards the holy grail: combining system dynamics and discrete-event simulation in healthcare. In Simulation Conference (WSC), Proceedings of the 2010 Winter (pp. 2293-2303). IEEE. (2010)
 
-\bibitem{proceeding1} Czajkowski, K., Fitzgerald, S., Foster, I., Kesselman, C.: Grid
-Information Services for Distributed Resource Sharing. In: 10th IEEE
-International Symposium on High Performance Distributed Computing, pp.
-181--184. IEEE Press, New York (2001)
+\bibitem{collins2004conceptual} Collins, L. M., Murphy, S. A., and Bierman, K. L. A conceptual framework for adaptive preventive interventions. Prevention science, 5(3), 185-196. (2004)
 
-\bibitem{proceeding2} Foster, I., Kesselman, C., Nick, J., Tuecke, S.: The Physiology of the
-Grid: an Open Grid Services Architecture for Distributed Systems
-Integration. Technical report, Global Grid Forum (2002)
+\bibitem{dallery2014optimizing} Dallery, J., and Raiff, B. R. : Optimizing behavioral health interventions with single-case designs: from development to dissemination. Translational behavioral medicine, 4(3), 290-303. (2014)
 
-\bibitem{url} National Center for Biotechnology Information, \url{http://www.ncbi.nlm.nih.gov}
+\bibitem{deshpande2014optimized} Deshpande, S., Nandola, N. N., Rivera, D. E., and Younger, J. W. : Optimized treatment of fibromyalgia using system identification and hybrid model predictive control. Control engineering practice, 33, 161-173. (2014)
+
+\bibitem{dongrivera2012dynamical} Dong, Y., Rivera, D. E., Thomas, D. M., Navarro-Barrientos, J. E., Downs, D. S., Savage, J. S., and Collins, L. M. : A dynamical systems model for improving gestational weight gain behavioral interventions. In American Control Conference (ACC), 2012 (pp. 4059-4064). IEEE. (2012)
+
+\bibitem{heckler2013realizing} Hekler, E. B., Klasnja, P., Traver, V., and Hendriks, M. : Realizing effective behavioral management of health: the metamorphosis of behavioral science methods. Pulse, IEEE, 4(5), 29-34. (2013)
+
+\bibitem{kaptein2015formalizing} Kaptein, M. C. : Formalizing Customization in Persuasive Technologies. In Persuasive Technology (pp. 27-38). Springer International Publishing. (2015)
+
+\bibitem{jaimes2015calma} Jaimes, L. G., Llofriu, M., and Raij, A. : Calma, an algorithm framework for mobile just in time interventions. In SoutheastCon 2015 (pp. 1-5). IEEE. (2015)
+
+\bibitem{nahum2014} Nahum-Shani, I., Hekler, E. B., and Spruijt-Metz, D. : Building health behavior models to guide the development of just-in-time adaptive interventions: A pragmatic framework. Health Psychology. (2015)
+
+\bibitem{prestwich2014does} Prestwich, A., Sniehotta, F. F., Whittington, C., Dombrowski, S. U., Rogers, L., and Michie, S. : Does theory influence the effectiveness of health behavior interventions? Meta-analysis. Health Psychology, 33(5), 465. (2014)
+
+\bibitem{riley2011healthbehavior} Riley, W. T., Rivera, D. E., Atienza, A. A., Nilsen, W., Allison, S. M., and Mermelstein, R. : Health behavior models in the age of mobile interventions: are our theories up to the task?. Translational behavioral medicine, 1(1), 53-71. (2011)
+
+\bibitem{timms2014hybrid} Timms, K. P., Rivera, D. E., Piper, M. E., and Collins, L. M. : A hybrid model predictive control strategy for optimizing a smoking cessation intervention. In American Control Conference (ACC), 2014 (pp. 2389-2394). IEEE. (2014)
+
+%\bibitem{jour} Smith, T.F., Waterman, M.S.: Identification of Common Molecular
+%Subsequences. J. Mol. Biol. 147, 195--197 (1981)
+
+%\bibitem{lncschap} May, P., Ehrlich, H.C., Steinke, T.: ZIB Structure Prediction Pipeline:
+%Composing a Complex Biological Workflow through Web Services. In: Nagel,
+%W.E., Walter, W.V., Lehner, W. (eds.) Euro-Par 2006. LNCS, vol. 4128,
+%pp. 1148--1158. Springer, Heidelberg (2006)
+
+%\bibitem{book} Foster, I., Kesselman, C.: The Grid: Blueprint for a New Computing
+%Infrastructure. Morgan Kaufmann, San Francisco (1999)
+
+%\bibitem{proceeding1} Czajkowski, K., Fitzgerald, S., Foster, I., Kesselman, C.: Grid
+%Information Services for Distributed Resource Sharing. In: 10th IEEE
+%International Symposium on High Performance Distributed Computing, pp.
+%181--184. IEEE Press, New York (2001)
+
+%\bibitem{proceeding2} Foster, I., Kesselman, C., Nick, J., Tuecke, S.: The Physiology of the
+%Grid: an Open Grid Services Architecture for Distributed Systems
+%Integration. Technical report, Global Grid Forum (2002)
+
+%\bibitem{url} National Center for Biotechnology Information, \url{http://www.ncbi.nlm.nih.gov}
 
 \end{thebibliography}
 
