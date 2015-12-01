@@ -88,10 +88,16 @@ tylarmurray@mail.usf.edu
 In theory, Just-in-Time Adaptive Interventions (JiTAIs) promise to empower personal behavioral goals by optimizing interventions to situational context and user behaviors.
 In practice, development of a JiTAI represents a major feat which will require integration of several emerging research areas and collaboration between behavioral scientists, systems engineers, and software designers.
 This paper outlines open challenges facing the development of JiTAIs and discusses the use of modeling as a common ground between behavioral scientists designing interventions and software engineers building applications.
-We propose that Computational Human Behavior Modeling (CHBM) has the potential to help create better behavioral theories, enable real-time ideographic intervention optimization, and facilitate more robust data analysis techniques.
+We propose that Computational Human Behavior Modeling (CHBM) has the potential to:
+
+\begin{itemize} 
+  \item help create better behavioral theories
+  \item enable real-time ideographic intervention optimization 
+  \item facilitate more robust data analysis techniques
+  
 First, a small set of definitions are presented to clarify ambiguities and mismatches in terminology between these two areas.
 Next, existing modeling concepts are used to formalize a modeling paradigm designed to fit the needs JiTAI development methodology.
-Finally, potential benefits and open challenges of this modeling paradigm are highlighted through examination of the model-development methodology, run-time user modeling, and model-based data analysis.
+Last, potential benefits and open challenges of this modeling paradigm are highlighted through examination of the model-development methodology, run-time user modeling, and model-based data analysis.
 
 \keywords{
   TODO
@@ -103,26 +109,31 @@ Finally, potential benefits and open challenges of this modeling paradigm are hi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 A recent trend in the area of persuasive technology is the development of mHealth applications which aim to deliver better, smarter, and more effective interventions via mobile and wearable devices. 
-One class of persuasive technologies with this aim is the ``Just-In-Time Adaptive Intervention'' (or JiTAI) which describes an intervention that adapts to an individual's changing needs and circumstances to deliver tailored support at the time when it is most needed.
-
-Thanks to great advances in wearable, mobile, and ubiquitous technologies an increasingly huge amount of data is now available to characterize the context of the subject.
+One class of persuasive technologies with this aim is the ``Just-In-Time Adaptive Intervention'' (or JiTAI) which describes an intervention that adapts to an individual's changing needs and circumstances to deliver tailored support at the time when it is most needed. \cite{nahum2014jitais}
+Thanks to great advances in wearable, mobile, and ubiquitous technologies increasingly rich data is now available to characterize the context of the subject for use in JiTAI applications.
 
 Researchers theorize that an intervention which can tailor based on the user and context may be an elegant solution to empower self-management of unhealthy behaviors like substance abuse, overeating, sedentary behavior, and more \cite{nahum2014}.
-Real-time monitoring of data to identify states of vulnerability or receptivity at any given moment is possible \cite{hekler2013realizing}, but ``a major gap exists between the technological capacity to deliver JITAIs and existing health behavior models.'' \cite{nahum2014}
+These persuasive technologies aim to utilize contextual information - data collected from the subject's surroundings and history - to deliver personalized interventions at the optimal moment in time.
+Real-time monitoring of data to identify states of special vulnerability to poor behavioral decisions or receptivity to intervention at any given moment is possible \cite{hekler2013realizing}, but ``a major gap exists between the technological capacity to deliver JITAIs and existing health behavior models.'' \cite{nahum2014}
 Proof-of-concept applications have demonstrated the ability to adapt interventions to users \cite{dallery2014optimizing, beck2010challenges} and context \cite{brailsford2010towards, collins2004conceptual}, but using current methods the complexity of the behavioral model underlying a JiTAI application grows exponentially as the complexity of the intervention design increases. 
-Current behavioral theories focus on nomothetic and static insights that do not offer the granularity and specificity to support the full potential of JiTAIs\cite{riley2011healthbehavior}.
+Current methods for conceptualizing the human system take a piece-wise, descriptive approach, examining a phenomena in detail, but often overlooking how the model fits into the bigger picture.
+The needs of a persuasive technology are very different from the needs of extant behavioral research.
+While the latter places emphasis on the study of the human system's intricacies, the former needs a model which provides generalized insight and specific numerical predictions.
+Behavioral theories traditionally focus on nomothetic and static insights that do not offer the granularity and specificity to support the full potential of JiTAIs\cite{riley2011healthbehavior}.
+These methods are sufficient for analysis of traits which do not change much over days or weeks, but data collection and intervention delivery timing is now available to the microsecond for physiological data, behavioral features at the minute-level, and psychological constructs (via EMA\cite{shiffman2008ecological}).
+
 The current development process for JiTAI-like persuasive technologies requires close collaboration between behavioral scientists and application developers as they struggle to code-ify the model from extant behavioral theories for each individual experiment.
 The models used by a programmer to describe a \emph{user} and the models used by behavioral scientists to describe a \emph{subject}, have certain key differences which can complicate the process of JiTAI design.
+In this work we present a hybridization of the two modeling paradigms designed to emphasize the strengths of each approach.
 
-In this work we present a hybridization of the two modeling paradigms designed to emphasize the strengths of each approach based on the recent work of Nahum-Shani et al. \cite{nahum2014}.
-The following interdisciplinary language and concepts will help enable communication between developers and behavioral scientists, and these concepts may also form the foundation of an improved methodology for the development of persuasive technology interventions.
+The following interdisciplinary language and concepts will help enable communication between developers and behavioral scientists, and these concepts will also form the foundation of an improved methodology for the development of persuasive technology interventions.
 As a part of this set of interdisciplinary terms, we introduce the concept of a Computational Human Behavior Model (CHBM) to describe this new class of models which aim to satisfy the demands of persuasive technology.
-The progression of behavioral science towards computational modeling has progressed more slowly than in other scientific domains because of the limited amount of detailed, time-intensive contextual and behavioral measures available.
-This progression from causal descriptive modeling to causal explanitory modeling and increased mathematical rigor is a natural progression which parallels historical trends in the natural sciences.
+%The progression of behavioral science towards computational modeling has progressed more slowly than in other scientific domains because of the limited amount of detailed, time-intensive contextual and behavioral measures available.
+%This progression from causal descriptive modeling to causal explanitory modeling and increased mathematical rigor is a natural progression which parallels historical trends in the natural sciences.
 %SOME ARTICLE SOMEWHERE highlights the progression of scientific modeling from casual descriptive models to computational modeling as amount of data available to a domain increases, and the study of human behavior seems to be following this trend. \cite{THAT ONE ARTICLE}
 
-Following definitions, we propose that by formalizing the CHBM underlying persuasive applications, it may be possible to create better behavioral theories, enable real-time ideographic optimization, facilitate more robust data analysis, and reduce application development time. 
-In this section we present a look at how the concept of a CHBM might be applied to address open issues holding back JiTAIs and we highlight the remaining issues which must be addressed to make Just-in-Time Adaptive Interventions a reality.
+Following definitions, we propose that by formalizing the CHBM underlying persuasive applications, it will be possible to create better behavioral theories, enable real-time ideographic optimization, facilitate more robust data analysis, and reduce application development time. 
+In this section we present a look at how the concept of a CHBM would be applied to address open issues holding back JiTAIs and we highlight the remaining issues which must be addressed to make Just-in-Time Adaptive Interventions a reality.
 
 \section{Selected Definitions}
 % TODO: remove quotes and paraphrase+cite instead?
@@ -162,7 +173,7 @@ In summary, a Computational Human Behavior Model (CHBM) should have:
 \begin{enumerate}
     \item a set of context, state, and behavior variables
     \item a set of computations which define behavior variables as a function of state which is itself a function of context
-    \item a logical abstraction which allows researchers to internalize the model's behavior such that they may be better able to estimate control of the human system in general
+    \item a logical abstraction which allows researchers to internalize the model's behavior such that they will be better able to estimate control of the human system in general
     \item guidelines regarding the applicable population and time-scale of the CHBM (i.e. in what populations is the CHBM most/least valid, and at what time-scale can the CHBM simulate realistic predictions?). 
 \end{enumerate}
 
@@ -478,7 +489,7 @@ Thanks to advances in wearable sensors and mobile technology, models are able to
 CHBMs can be used with contextual data to produce a time series of expected behavioral outcomes throughout the study.
 The simulated ``theoretical data'' can then be directly compared to the ``observed data'' to observe how the theory differs from the reality.
 The process of comparing theoretical predictions to empirical data can be repeated with simulations from alternate theories and a goodness-of-fit metric can be used to evaluate the hypothesis against alternatives.
-Additionally, unification of existing behavioral models into this common paradigm might enable better collaboration between proponents of different theories.
+Additionally, unification of existing behavioral models into this common paradigm would enable better collaboration between proponents of different theories.
 
 CHBM benefits:
 \begin{enumerate}
@@ -524,9 +535,13 @@ In this paper we have offered supporting terminology, the CHBM formalization, an
 
 \bibitem{nahum2014} Nahum-Shani, I., Hekler, E. B., and Spruijt-Metz, D. : Building health behavior models to guide the development of just-in-time adaptive interventions: A pragmatic framework. Health Psychology. (2015)
 
+\bibitem{nahum2014jitais} Nahum-Shani, I., Smith, S. N., Tewari, A., Witkiewitz, K., Collins, L. M., Spring, B., & Murphy, S. : Just in time adaptive interventions (jitais): An organizing framework for ongoing health behavior support. Methodology Center technical report, (14-126). (2014)
+
 \bibitem{prestwich2014does} Prestwich, A., Sniehotta, F. F., Whittington, C., Dombrowski, S. U., Rogers, L., and Michie, S. : Does theory influence the effectiveness of health behavior interventions? Meta-analysis. Health Psychology, 33(5), 465. (2014)
 
 \bibitem{riley2011healthbehavior} Riley, W. T., Rivera, D. E., Atienza, A. A., Nilsen, W., Allison, S. M., and Mermelstein, R. : Health behavior models in the age of mobile interventions: are our theories up to the task?. Translational behavioral medicine, 1(1), 53-71. (2011)
+
+\bibitem{shiffman2008ecological} Shiffman, S., Stone, A. A., & Hufford, M. R. : Ecological momentary assessment. Annu. Rev. Clin. Psychol., 4, 1-32. (2008)
 
 \bibitem{timms2014hybrid} Timms, K. P., Rivera, D. E., Piper, M. E., and Collins, L. M. : A hybrid model predictive control strategy for optimizing a smoking cessation intervention. In American Control Conference (ACC), 2014 (pp. 2389-2394). IEEE. (2014)
 
