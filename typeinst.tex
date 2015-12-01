@@ -184,14 +184,16 @@ The following section details each of these CHBM components, followed by a metho
 A distinguishing feature of a CHBM is the separation of the subject definition into environmental \emph{context}, internal \emph{state}, and \emph{behavior} variables.
 In reality, an individual represents an inseparable component within the larger environment, but this simplification segments out the human system for definition.
 
-Dey et al (2001) performed an extensive literature search to define an agent's context as: ``any information that can be used to characterize the situation of entities (i.e., whether a person, place, or object) that are considered relevant to the interaction between a user and an application, including the user and the application themselves. Context is typically the location, identity, and state of people, groups, and computational and physical objects.''
+%Dey et al (2001) performed an extensive literature search to define an agent's context as: ``any information that can be used to characterize the situation of entities (i.e., whether a person, place, or object) that are considered relevant to the interaction between a user and an application, including the user and the application themselves. Context is typically the location, identity, and state of people, groups, and computational and physical objects.''
 In most cases, it is sufficient to define context as a set of selected information from the environment available for inflow into the human system, but contextual information from the environment may be summarized and represented in countless ways, depending on the theories used to inform the model.
-In the real world, consider this to be everything that is observed by the senses. 
+In reality, consider this to be everything that is observed by the senses. 
 Some of this information will alter the internal state of the human system, but some may not. 
-The set of internal state variables which define the inner workings of the human system are dependent only on past states and the current context. 
-In the real world, internal state includes all information stored in the chemical and physical  arrangement of our bodies. 
+The selection and summary of contextual data will depend both on the nature of the persuasive system and the data which is available during the experiment.
+%The set of internal state variables which define the inner workings of the human system are dependent only on past states and the current context. 
+The environmental context influences the human system, which has an internal state represented by a set of internal state variables.
+In reality, internal state includes all information stored in the chemical and physical  arrangement of our bodies. 
 In order to make the model tractable, the mass of information is summarized into a set of meaningful constructs.
-Behavior can be defined in many ways, but in a CHBM behavior is defined as any flow of information out of the human system and into the environment.
+%Behavior can be defined in many ways, but in a CHBM behavior is defined as any flow of information out of the human system and into the environment.
 Information flowing into a CHBM comes from the environment around an individual (the context) as an inflow which is independent of the individual's state in this instant.
 Similarly, information flowing out of a CHBM (as behaviors) represents actions the individual is taking to impact the environment.
 
@@ -253,24 +255,24 @@ Continuing with our our assumption that node interrelations act as linear sums, 
     \label{linear-formulation}
 \end{equation}
 
-Combining multiple inflows via sum is referred to as the superposition principle and is the defining characteristic of linear systems (not to be confused with this linear formulation).
+%Combining multiple inflows via sum is referred to as the superposition principle and is the defining characteristic of linear systems (not to be confused with this linear formulation).
 Using this formulation, the general form of the CHBM is expressed via the network graph alone.
 The general solution of an CHBM does not require definition of the constants, but a simulation cannot be run until some numerical value is assumed. 
 These constants often have theoretical significance in that they often have meaningful influence upon system behavior. 
 Scaling-coefficients, for instance allow for relative weighting of each inflow. 
 Similarly, the coefficients of a dynamical equation define how quickly variables react to a change ``upstream''.
-To express an ideographic implementation of this general model, a table of coefficient values must also be included. 
+%To express an ideographic implementation of this general model, a table of coefficient values must also be included. 
 
 This linear, homogeneous-graph representation is useful, but also very limited.
 One important feature which this formulation does not take into account is the dynamics of the relationship.
 For instance, the above linear model assumes that there is no delay between variables.
 This assumption is fine for some applications, but this is a very poor assumption for human behavior models. 
-What if A is influenced by B but there is some lag before the effect manifests?
-What if A is influenced by B, but only if B is above some threshold value? 
-What if A is influenced by the rate of change in B rather than the value of B itself? 
-All of these scenarios cannot be expressed using this simple linear relationship. 
+%What if A is influenced by B but there is some lag before the effect manifests?
+%What if A is influenced by B, but only if B is above some threshold value? 
+%What if A is influenced by the rate of change in B rather than the value of B itself? 
+%All of these scenarios cannot be expressed using this simple linear relationship. 
 
-To resolve some of these issues, a differential equations can be used to describe the relationship between variables as described by Dong et al.\cite{dongrivera2012dynamical}. 
+Differential equations based on a fluid-flow analogy can be used to describe the relationship between variables as described by Dong et al.\cite{dongrivera2012dynamical}. 
 Using the differential formulation our equation for B in Graph 1 becomes:
 
 \begin{equation}
@@ -397,13 +399,7 @@ Assuming our CHBM uses an adaptation of the Theory of Planned Behavior \cite{Ajz
 Since behavioral belief is part of the internal state and the intervention should be defined as part of the user's context, a context variable should be included in our model to represent external influences on behavioral belief from the environment.
 After defining the expected effect of an intervention, the CHBM can then be used to predict a detailed account of user response.
 The use of simulations such as this in the process of designing controls is well-explored in many other areas, but is nearly unheard of in behavioral science.
-This is in part due to the prevalence of abstract causal descriptive models and the novelty of CHBMs, but there remain several important issues which have not yet been addressed.
-First, the definition of an intervention's effect on a user is a subjective process of quantifying qualities which currently have no point of reference.
-That is: how is one to know what amount of behavioral belief a given ``sedentary activity fact intervention'' imparts?
-Guidelines for estimating these values should become more clear after further precedent has been set, but no standards yet exist.
-Second, the running of a single simulation implies a generically applicable user model, but in reality there are likely to be multiple different responses to a single intervention which may depend on on other contextual variables. 
-In order to get a more realistic look at user responses to an intervention, many simulations with varying parameters set to match the expectations of the researchers should be run and analyzed; this would require a CHBM simulation software suite that does not yet exist.
-% Third… ?
+This is in part due to the prevalence of abstract causal descriptive models and the novelty of CHBMs, but there remain several important issues highlighted below which have not yet been addressed in this space.
 
 CHBM benefits: 
 \begin{enumerate}
@@ -419,7 +415,13 @@ Open questions:
     \item Modeling software to provide abstraction of the mathematical complexity exists for other engineering domains, but software is not directly applicable to the problem of CHBM development. %TODO how?
     \item Software for running simulations to test the function of an a priori CHBM is non-existent, and standards for describing models, simulations, and results in this domain are not established.
     \item Methodologies for creating an a priori CHBM are not fully established, and mappings from existing causal descriptive models (like CSEL's fluid-flow analogy) may be model-dependent.
+    \item The definition of an intervention's effect on a user is a subjective process of quantifying qualities which currently have no point of reference.
+That is: how is one to know what amount of behavioral belief a given ``sedentary activity fact intervention'' imparts?
+Guidelines for estimating these values should become more clear after further precedent has been set, but no standards yet exist.
+  \item The running of a single simulation implies a generically applicable user model, but in reality there are likely to be multiple different responses to a single intervention which may depend on on other contextual variables. 
+In order to get a more realistic look at user responses to an intervention, many simulations with varying parameters set to match the expectations of the researchers should be run and analyzed; this would require a CHBM simulation software suite that does not yet exist.
 \end{enumerate}
+
 
 \subsection{CHBMs at Run-time}
 In this section methods in which CHBMs may be used in the persuasive technology itself are discussed. 
@@ -444,7 +446,7 @@ Consider a decision rule which is coincidentally satisfied for the entire first 
 The rules which govern the behavior in this case become part of the theory underlying the application and are clumsily expressed as decision rules.
 In contrast, optimization of intervention delivery using a CHBM can be done algorithmically to minimize the area between the desired and observed target behavior.
 
-Assuming that a CHBM has been formulated by behavioral scientists prior to implementation of the designed application, the software can directly make use of the CHBM to model the user.
+%Assuming that a CHBM has been formulated by behavioral scientists prior to implementation of the designed application, the software can directly make use of the CHBM to model the user.
 Because CHBMs are computational in nature, prediction of behavior is possible given information about the user's present and future context.
 Furthermore, because the behaviors in computational models are quantitative, an application could search available intervention options to find one which produces the ideal amount of a target behavior.
 That is, given three intervention options (A, B, C) with known effect on user context, the model can be run at t+1 for each option, and the optimum result can be chosen.
@@ -476,16 +478,14 @@ challenges:
 Another rising challenge for persuasive technology researchers is the increasing complexity of data analysis methods needed to handle large amounts of ``in the wild'' data.
 Techniques designed to simplify construct relationships using statistical inferences between distinct groups of measurements cannot address emerging research questions which span the full spectrum of subject demographics, situational context, and time-scale. 
 Contemporary approaches apply data mining and machine learning techniques to fit more advanced models to study data and identify key factors, but findings revealed in these exercises can be difficult to generalize and interpret.
-For example, ``even if empirical evidence suggests that a given factor (e.g., psychological distress) marks state of vulnerability to a specific proximal outcome (e.g., it is highly predictive of poor state coping capacity), there is often insufficient empirical evidence concerning the cut-point of this factor that can inform the selection of one intervention option over another.'' \cite{nahum2014}.
-A shift in behavioral research from a focus on relationships between specific variables under specific conditions towards more generalizable hypotheses seems to have begun. 
-This shift is being ushered in by researchers working with persuasive technologies who are looking for practical applications and easy-to-reproduce models of the human system.
+%For example, ``even if empirical evidence suggests that a given factor (e.g., psychological distress) marks state of vulnerability to a specific proximal outcome (e.g., it is highly predictive of poor state coping capacity), there is often insufficient empirical evidence concerning the cut-point of this factor that can inform the selection of one intervention option over another.'' \cite{nahum2014}.
+%A shift in behavioral research from a focus on relationships between specific variables under specific conditions towards more generalizable hypotheses seems to have begun. 
+%This shift is being ushered in by researchers working with persuasive technologies who are looking for practical applications and easy-to-reproduce models of the human system.
 By using a model as the hypothesis of an experiment rather than focusing solely on a particular relationship between two variables in specific conditions, research findings can be generalized more easily to practical persuasive applications.
 Methods for evaluating models, rather than evaluating correlation between two variables should be increasingly focused upon in the analysis of behavioral data.
 While analysis of correlation between variables looks at the statistical relationship between groups of data points, the evaluation of a model involves comparing the experimental data to the predictions of the model.
-Thanks to advances in wearable sensors and mobile technology, models are able to predict behavioral outcomes from detailed contextual information collected in the study.
-
+%Combining CHBMs with the advances in wearable sensors and mobile technology, models are able to predict behavioral outcomes from detailed contextual information collected in the study.
 %TODO: include graphic?
-
 CHBMs can be used with contextual data to produce a time series of expected behavioral outcomes throughout the study.
 The simulated ``theoretical data'' can then be directly compared to the ``observed data'' to observe how the theory differs from the reality.
 The process of comparing theoretical predictions to empirical data can be repeated with simulations from alternate theories and a goodness-of-fit metric can be used to evaluate the hypothesis against alternatives.
