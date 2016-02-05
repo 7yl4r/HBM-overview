@@ -76,7 +76,7 @@ tylarmurray@mail.usf.edu
 % (search for the string "\mainmatter" where a contribution starts).
 % "llncs.dem" accompanies the document class "llncs.cls".
 %
-
+%
 % TODO: WHAT ARE THESE?
 \toctitle{Lecture Notes in Computer Science}
 \tocauthor{Authors' Instructions}
@@ -84,7 +84,7 @@ tylarmurray@mail.usf.edu
 
 \begin{abstract}
 In theory, Just-in-Time Adaptive Interventions (JiTAIs) are a persuasive technology which promise to empower personal behavioral goals by optimizing treatments to situational context and user behaviors.
-In practice, development of a JiTAI represents a major feat which will require integration of several emerging research areas and collaboration between behavioral scientists, systems engineers, and software designers.
+%In practice, development of a JiTAI represents a major feat which will require integration of several emerging research areas and collaboration between behavioral scientists, systems engineers, and software designers.
 This paper outlines open challenges facing the development of JiTAIs and discusses the use of modeling as a common ground between behavioral scientists designing interventions and software engineers building applications.
 We propose that Computational Human Behavior Modeling (CHBM) has the potential to 1) help create better behavioral theories, 2) enable real-time ideographic intervention optimization, and 3) facilitate more robust data analysis techniques.
 First, a small set of definitions are presented to clarify ambiguities and mismatches in terminology between these two areas.
@@ -108,7 +108,7 @@ Researchers theorize that an intervention which can tailor based on the user and
 These persuasive technologies aim to utilize contextual information --- data collected from the subject's surroundings and history --- to deliver personalized interventions at the optimal moment in time.
 Real-time monitoring of data to identify states of special vulnerability to poor behavioral decisions or receptivity to intervention at any given moment is possible \cite{hekler2013realizing}, but ``a major gap exists between the technological capacity to deliver JITAIs and existing health behavior models.'' \cite{nahum2014}
 Proof-of-concept applications have demonstrated the ability to adapt interventions to users \cite{dallery2014optimizing} \cite{beck2010challenges} and context \cite{brailsford2010towards} \cite{collins2004conceptual}, but using current methods the complexity of the behavioral model underlying a JiTAI application grows exponentially as the complexity of the intervention design increases. 
-Current methods for conceptualizing the human system take a piece-wise, descriptive approach, examining a phenomena in detail, but often overlooking how the model fits into the bigger picture.
+%Current methods for conceptualizing the human system take a piece-wise, descriptive approach, examining a phenomena in detail, but often overlooking how the model fits into the bigger picture.
 The needs of a persuasive technology are very different from the needs of extant behavioral research.
 While the latter places emphasis on the study of the human system's intricacies, the former needs a model which provides generalized insight and specific numerical predictions.
 Behavioral theories traditionally focus on nomothetic and static insights that do not offer the granularity and specificity to support the full potential of JiTAIs\cite{riley2011healthbehavior}.
@@ -117,10 +117,8 @@ These methods are sufficient for analysis of traits which do not change much ove
 The current development process for JiTAI-like persuasive technologies requires close collaboration between behavioral scientists and application developers as they struggle to code-ify the model from extant behavioral theories for each individual experiment.
 The models used by a programmer to describe a \emph{user} and the models used by behavioral scientists to describe a \emph{subject}, have certain key differences which can complicate the process of JiTAI design.
 In this work we present a hybridization of the two modeling paradigms designed to emphasize the strengths of each approach.
-
-The following interdisciplinary language and concepts will help enable communication between developers and behavioral scientists, and these concepts will also form the foundation of an improved methodology for the development of persuasive technology interventions.
+%The following interdisciplinary language and concepts will help enable communication between developers and behavioral scientists, and these concepts will also form the foundation of an improved methodology for the development of persuasive technology interventions.
 As a part of this set of interdisciplinary terms, we introduce the concept of a Computational Human Behavior Model (CHBM) to describe this new class of models which aim to satisfy the demands of persuasive technology.
-
 Following definitions, we propose that by formalizing the CHBM underlying persuasive applications, it will be possible to create better behavioral theories, enable real-time ideographic optimization, facilitate more robust data analysis, and reduce application development time. 
 In this section we present a look at how the concept of a CHBM would be applied to address open issues holding back JiTAIs and we highlight the remaining issues which must be addressed to make Just-in-Time Adaptive Interventions a reality.
 
@@ -171,7 +169,8 @@ In reality, an individual represents an inseparable component within the larger 
 In most cases, it is sufficient to define context as a set of selected information from the environment available for inflow into the human system, but contextual information from the environment may be summarized and represented in countless ways.
 In reality, consider context to be everything that is observed by the senses. 
 Some of this information will alter the internal state of the human system, but some may not. 
-The selection and summary of contextual data will depend both on the nature of the persuasive system and the data which is available during the experiment.
+When building a model based on theory alone, modelers should make the selection and summary of contextual constructs to be as generalizable, extensible, and reusable as possible.
+When utilizing a model to simulate a particular experiment, efforts to connect avaialable data to that which is available during the experiment may be needed, and contextual information not available empirically may need to be simulated.
 %The set of internal state variables which define the inner workings of the human system are dependent only on past states and the current context. 
 The environmental context influences the human system, which has an internal state represented by a set of internal state variables.
 In reality, internal state includes all information stored in the chemical and physical arrangement of our bodies. 
@@ -199,15 +198,15 @@ For this reason, it may be important to specify the circumstances in which a giv
 This is not analogous to the issue of over-fitting in machine learning, as the model can remain accurate across the population; the primary reason for limiting the number of variables or the functional complexity of relationships is to preserve the heuristic understanding of the model.
 
 \subsection{Creating a CHBM}
-A network graph is an effective abstraction to describe the relationships between nodes in a CHBM.
+A network graph is an effective abstraction to describe the relationships (represented by arrows or ``edges'') between variables (represented by the graph's ``nodes'') in a CHBM.
 In this case a directed graph wherein edge arrows represent the flow of information between nodes is used.
 Thus, a directed graph edge from node A to node B indicates that information flows from node A into node B. 
-
-\begin{equation}
-  A => B
-  \label{eq:simplest-sample}
-\end{equation}
-
+%
+%\begin{equation}
+%  A => B
+%  \label{eq:simplest-sample}
+%\end{equation}
+%
 This relation can be read as ``A influences B'', ``A informs B'', or similar.  
 This choice of notation is in agreement with graphs used in information theory, communications models, and behavioral science.
 In contrast, some graphing paradigms (such as probabilistic graphical models and software design) prefer to use notation wherein an edge is used to represent dependency.
@@ -273,7 +272,7 @@ This is accomplished by setting coefficients of dynamical components to 0.
 One might think, then, that there is some general formula which could express any functional form, and that this form should be used to express the relationships between variables in all CHBM graphs.
 While such formulations do exist (such as Taylor or Fourier series approximations or even ANN-based relations), this usage tends to make the model difficult to understand and to simulate with.
 Linear and differential formulations are in such widespread use because of the relative ease with which we can understand and solve them. 
-Additionally, the table of coefficients needed to express an idiographic case of the model quickly becomes prohibitively large, and the effect of each coefficient on the outcome is not intuitively meaningful.
+%Additionally, the table of coefficients needed to express an idiographic case of the model quickly becomes prohibitively large, and the effect of each coefficient on the outcome is not intuitively meaningful.
 
 Let us now consider the case where a graph-wide assumption is \emph{NOT} made.
 That is, we will specify the functional form of each node individually so that each edge on the graph may be linear in form while another may be differential.
@@ -281,8 +280,9 @@ This has the benefit of allowing for both complex relationships between variable
 In this way one could craft a model in which two variables are linearly related and a third is dependent on the variance of another variable (a particularly odd formulation, but one which is relevant to behavioral theory).
 Unfortunately, this approach also means that a table of formulations must now be included with our graph to show the meaning of each edge in the graph.
 Consider for example the table below for Graph 2:
-
-\begin{centering}
+%
+\begin{center}
+  \centering
   \begin{tabular}{ | l | l | l |}
       \hline
       node & formulation \\ \hline
@@ -290,15 +290,15 @@ Consider for example the table below for Graph 2:
       D & $coeff_{cd}C(t-\theta_{cd}) - \tau_{d}\frac{dD}{dt} + const_d$ \\ \hline
   \end{tabular}
 %Table 1: an example formulation table for Graph 2, showing a linear and first-order differential equation relations between constructs, respectively.
-\end{centering}
-
+\end{center}
+%
 If a fixed number of functional forms is adhered to, the graph can be made to visually represent these functional forms through the use of different node icon shapes. 
 This approach quickly begins to resemble applications which use flow-based programming. 
 Indeed, they are quite similar in their approach, and the specification of a CHBM is quite similar to the writing of a program.
 
-Note also that a node can set any arbitrary formulation if needed. 
-This is the least desirable situation, since the meaning of an inflow to each node even more convoluted. 
-Though this usage reduces the ability of the graph to reduce processing load on the user through abstraction, there may be some cases where this type of formulation is desirable. 
+%Note also that a node can set any arbitrary formulation if needed. 
+%This is the least desirable situation, since the meaning of an inflow to each node even more convoluted. 
+%Though this usage reduces the ability of the graph to reduce processing load on the user through abstraction, there may be some cases where this type of formulation is desirable. 
 %Consider the following graph and formulation table:
 %\begin{equation}
 %    A => B <= C => D => E
@@ -335,7 +335,7 @@ Hypothetical situations are posed to highlight the potential value of CHBM use i
 
 \subsection{\emph{A Priori} CHBMs}
 Prior to development of a JiTAI, a mental model of the target user group is established.
-This a priori model represents the researcher's understanding of the user group, and the design of the intervention utilizes the model in order to predict user actions.
+This \emph{a priori} model represents the researcher's understanding of the user group, and the design of the intervention utilizes the model in order to predict user actions.
 This level of detail to which this model is documented varies greatly between applications, and in some cases the causal descriptive model has little grounding in existing behavioral theory \cite{prestwich2014does}.
 % research has (NOT?) indicated that persuasive applications with a firm basis in theory have been found to be more effective \cite{???}.
 % “Establishing a scientific model is an important step in constructing behavioral interventions (Collins, Murphy, and Bierman, 2004).” \cite{nahum2014}
@@ -371,19 +371,18 @@ This is in part due to the prevalence of abstract causal descriptive models and 
 \emph{Benefits of CHBMs in Persuasive Design:}
 \begin{enumerate}
     \item By using a CHBM with dynamical equations, the dynamics of relationships between variables can be explicitly described as a part of the model.
-    \item The use of an explicit a priori model for intervention design helps researchers formulate research questions and design experiments in a concrete, testable fashion.
-    \item This additional detail needed to define a CHBM removes post-design modeling assumptions and overlooked details that can dilute the underlying behavioral theory or invalidate study results.
-    \item The process of defining a CHBM itself can lead to new insights and research questions which are of particular interest to JiTAI design and are almost entirely unaddressed by existing theory.
+    \item The use of an explicit a priori model for intervention design helps researchers formulate testable research questions and experiment designs.
+    \item The additional pre-study detail removes post-study modeling assumptions that can dilute the underlying behavioral theory or invalidate study results.
+    \item The process of defining a CHBM itself can lead to new insights and research questions which are almost entirely unaddressed by existing theory.
 \end{enumerate}
 
 \emph{Open Questions for CHBM-Empowered Persuasive Design:}
 \begin{enumerate}
-    \item The process of defining a CHBM requires detailed knowledge of both the underlying behavioral theory and the mathematics. Relatively few researchers today possess the necessary skillset, especially when considering the use of dynamical systems equations.
-    \item Modeling software to provide abstraction of the mathematical complexity exists for other engineering domains, but software is not directly applicable to the problem of CHBM development. %TODO how?
-    \item Software for running simulations to test the function of an \emph{a priori} CHBM is non-existent, and standards for describing models, simulations, and results in this domain are not established.
+    \item The process of defining a CHBM requires detailed knowledge of both the underlying behavioral theory and the mathematics. Relatively few researchers today possess the necessary skillset.
+    \item Modeling software exists for other engineering domains, but is not directly applicable to the problem of CHBM development. %TODO how?
+    \item Software for running simulations to test the function of an \emph{a priori} CHBM is non-existent.
     \item Methodologies for creating an \emph{a priori} CHBM are not fully established, and mappings from existing causal descriptive models may be model-dependent.
-    \item The definition of an treatment's effect on a user is a subjective process of quantifying qualities which currently have no point of reference.
-That is: how is one to know what amount of behavioral belief a specific ``sedentary activity fact treatment'' imparts?
+    \item The definition of a treatment's effect on a user is a subjective process. That is: how is one to know what amount of behavioral belief a specific ``sedentary activity fact treatment'' imparts?
 %Guidelines for estimating these values should become more clear after further precedent has been set, but no standards yet exist.
   \item %The running of a single simulation implies a generically applicable user model, but there are likely to be multiple different responses to a single treatment which may depend on on other contextual variables. 
 In order to get a more realistic look at user responses to an treatments, many simulations with varying parameters set to match the expectations of the researchers should be run and analyzed; this would require a CHBM simulation software suite that does not yet exist.
@@ -401,12 +400,12 @@ Establishing a set of decision rules for a small number of conditions is feasibl
 Even worse, when making use of adaptive interventions this set of rules must be expanded even further to map between all possible contexts and intervention permutations.
 Relying on simple decision rules loosely guided by existing theory to define the optimization of intervention delivery to control a complex system inevitably leads to under-optimized interventions, over-simplified models, and weakened data.
 An additional problem with this approach is the use of a binary state (i.e. rule satisfied or not) to optimize delivery over a continuous time.
-Consider a decision rule which is coincidentally satisfied for the entire first day of the study, and unsatisfied for the rest of the two-week study:
-\emph{Should the treatment be delivered on the first day continuously, on some interval, or randomly spread throughout the first day?
-Perhaps no treatment be delivered for the remainder of the two weeks while the rule is not satisfied?
-Or some minimum number of treatments per day should be spread randomly or applied at particular times?
-Should there be a secondary fallback criterion if the primary rule is not satisfied?}
-The rules which govern the behavior in this case become part of the theory underlying the application and are clumsily expressed as decision rules.
+%Consider a decision rule which is coincidentally satisfied for the entire first day of the study, and unsatisfied for the rest of the two-week study:
+%\emph{Should the treatment be delivered on the first day continuously, on some interval, or randomly spread throughout the first day?
+%Perhaps no treatment be delivered for the remainder of the two weeks while the rule is not satisfied?
+%Or some minimum number of treatments per day should be spread randomly or applied at particular times?
+%Should there be a secondary fallback criterion if the primary rule is not satisfied?}
+Because of this oversimplification, rules which govern the behavior often become part of the theory underlying the application and are clumsily expressed as decision rules.
 In contrast, optimization of treatment delivery using a CHBM can be done algorithmically to minimize the area between the desired and observed target behavior.
 
 %Assuming that a CHBM has been formulated by behavioral scientists prior to implementation of the designed application, the software can directly make use of the CHBM to model the user.
@@ -427,7 +426,7 @@ In this way, application creators can implement software utilizing the advanced 
 
 \emph{Benefits of CHBMs for Persuasive Applications:}
 \begin{enumerate}
-    \item Using a CHBM enables the use of optimization algorithms instead of decision rules. This change is needed to express the complexity necessary to effectively control target behaviors in the human system.
+    \item Using a CHBM enables the use of optimization algorithms instead of decision rules. This change is needed to apply complex control over target behaviors.
     \item CHBMs can be adapted to fit a user's needs at run-time, establishing an idiographic model of each subject from the generalized CHBM.
 \end{enumerate}
 
@@ -456,9 +455,9 @@ Additionally, unification of existing behavioral models into this common paradig
 
 \emph{Benefits of CHBMs Post-Experiment:}
 \begin{enumerate}
-    \item Through the use of CHBMs, analysis of experimental data can shift focus from individual construct relationships to a larger view, evaluating the model itself as a hypothesis.
+    \item Analysis of experimental data can shift focus from individual construct relationships to a larger view, evaluating the model as a hypothesis.
     \item Comparison between different theories can be informed by a comparison of their respective models using a goodness-of-fit metric against empirical data.
-    \item The use of CHBMs makes re-use of theory and therefore collaborative improvement on existing theories easier than crafting an entirely new theory --- reversing the existing paradigm which has lead to a dizzying multitude of fragmented theories and sub-theories.
+    \item The use of CHBMs makes re-use of theory and therefore collaborative improvement on existing theories easier --- reversing the existing paradigm which has lead to a dizzying multitude of fragmented theories and sub-theories.
 \end{enumerate}
 
 \emph{Open Questions for CHBM Post-Experiment Methods:}
